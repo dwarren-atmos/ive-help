@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>FIELD</title>
+</head>
+<body>
+<center>
+
+	<em>This command is used to select a field to be plotted from
+the current data file.</em></h1>
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>When a data <a href="file.html">FILE</a> is opened, buttons
+appear at the bottom of the main widget and are labeled with the
+field names. This allows for any field to be selected by clicking
+with the left mouse button. 
+
+<p>Additional field buttons may be added to the IVE Main Window
+using the FIELD command. When a field is defined at the command
+line, that field is calculated and a button appears. The new field
+can subsequently be selected by merely clicking on the button.</p>
+</li>
+</ul>
+
+Command: (Two possible formats exist) 
+
+<ul>
+<li>FIELD = field_name</li>
+
+<li>FIELD = expression, name</li>
+</ul>
+
+Arguments : 
+
+<ul>
+<li>field_name: valid choices for field_name are either the name of
+a field variable or a diagnostic variable that the user has made
+provision to calculate either at the <a href=
+"computations.html">command line</a> or in <a href=
+"calc_field.html">CALC_FIELD</a> which is a subroutine of the <a
+href="transform_writing.html">transform file</a>.</li>
+
+<li>expression: a mathematical expression in terms of the existing
+field variables or diagnostic variables (see <a href=
+"computations.html">Diagnostic Computations Using the Command
+Line</a>).</li>
+
+<li>name: the name of the new field variable defined by the
+expression</li>
+</ul>
+
+Examples : 
+
+<ul>
+<li>FIELD=T</li>
+
+<li>FIELD=A*B/C, X<br>
+ produces a new field called "X" which represents the result of the
+expression A*B/C</li>
+
+<li>FIELD=VORT<br>
+ where "VORT" is a diagnostic variable which represents the
+vorticity field</li>
+</ul>
+
+Notes : 
+
+<ul>
+<li>In the case of staggered grids such as U and P, one may use the
+expression (U@P), where the value of U is linearly interpolated to
+the P grid (See also <a href="computations.html">Diagnostic
+Computations Using the Command Line</a>).
+
+<center>EXAMPLE: FIELD=(U@P)*(W@P), UW</center>
+</li>
+
+<li>When a field from the data file is read in, it is read into
+memory and stays in memory until either a new data file is opened,
+or memory is freed using the <a href="free.html">FREE</a>
+command.</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

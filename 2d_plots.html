@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>Producing a 2D Scalar Plot</title>
+</head>
+<body>
+<center>
+
+	<em>This file discusses the procedures for creating scalar
+plots in two dimensions.</em></h1>
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<h3>Procedures:</h3>
+
+<ul>
+<li>It is first necessary to input a data <a href=
+"file.html">FILE</a>. This activates the Window/Slicer Widget
+(depicted below).</li>
+
+<li>Then, select a <a href="field.html">FIELD</a>.</li>
+
+<li>At the Window/Slicer Widget, "fix" or "average" all coordinates
+<em>except two</em>. These two variables will become the ordinate
+and abscissa in your 2D plot. Adjust the range and domain of the
+plot using the slider bars of the free coordinates (see <a href=
+"window.html">WINDOW</a>).</li>
+</ul>
+
+<p><a href="images/window_slicer.gif"></a></p>
+
+<center><img src="images/window_slicer.gif" alt=
+"Window/Slicer Widget" border="0"></center>
+
+<center><i>Window/Slicer Widget</i></center>
+
+<br>
+<br>
+ 
+
+<ul>
+<li style="list-style: none"><em>NOTE: The number of variables that
+you allow to vary determines the number of dimensions contained in
+the plot. For example, if only one coordinate is "free", then IVE
+will create a <a href="1d_plots.html">one-dimensional plot</a>. If
+you "fix" or "average" all coordinates, then a Value Info Window is
+activated, displaying the value of the field at the fixed point you
+have specified.</em></li>
+
+<li>Make sure that "Scalar Plot" is displayed in the IVE Main
+Window (see <a href="type.html">TYPE</a>).</li>
+</ul>
+
+<center><a href="images/scalmain.gif"><img src=
+"images/scalmain.gif" alt="IVE MAIN WINDOW (Scalar Plots)" border=
+"0"></a><br>
+<i>IVE Main Window</i></center>
+
+<ul>
+<li>Next, from the Properties Window (pictured below), choose a
+fill type by clicking on the "Fill Contours" box. Several options
+are available: 
+
+<ul>
+<li>Never: Scalar plots will be contoured (see <a href=
+"custom_lines.html">Custom Lines</a>)</li>
+
+<li>Except on Overlay: All 2D plots will be color-filled except
+overlay plots</li>
+</ul>
+</li>
+</ul>
+
+<p><a href="images/properties.gif"></a></p>
+
+<center><img src="images/properties.gif" alt="Properties Window"
+border="0"></center>
+
+<center><i>Properties Window</i></center>
+
+<div style="margin-left: 2em">
+<ul>
+<li>Always: All 2D plots and overlays will be color-filled</li>
+
+<li>With Stipple: All plots are filled with grayscale stipple (See
+<a href="color_fill.html">Color Fill</a>). When this option is
+selected, the Shading Widget is activated, allowing the user to
+specify a value range for each grayscale shade.</li>
+</ul>
+</div>
+
+<center><img src="images/shading.gif" border="1" alt=
+"Shading Widget"><br>
+<i>Shading Widget</i></center>
+
+<ul>
+<li style="list-style: none">The properties window also controls
+contour spacing, contour labeling, axis scales, and tic intervals.
+Contour spacing is specified by interval or by value. Selecting
+"Interval" spaces the contours by the amount that you enter in the
+data entry box provided. If "0" or "d" is entered, IVE
+automatically computes an interval for your plot. On the other
+hand, if you select "Values" it is necessary to input the value of
+each contour in the data entry box. 
+
+<p>Both linear and logarithmic axis scales are available in IVE and
+can be selected by clicking on the appropriate diamond-shaped
+button. Major and minor axis tic intervals can be specified by
+clicking on the apropriate boxes and inputting the desired
+values.</p>
+</li>
+
+<li>Finally, when all parameters have been set, click on "New Plot"
+in the IVE Main Window to display the plot, or "Overlay Plot" to
+overlay an existing plot (see <a href="plot.html">PLOT</a> and <a
+href="overlay_plot.html">OVERLAY PLOT</a>).</li>
+</ul>
+
+<h3>Example:</h3>
+
+<ul>
+<li>A sample 2D, scalar, color-fill plot is shown below:</li>
+</ul>
+
+<center><img src="images/scalar_plot.gif" border="1" width=
+"95%"></center>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>MULTIPLE_READ</title>
+</head>
+<body>
+<center>
+
+	<em>This command tells IVE that the data set may be spread over
+multiple files with each file containing data at one point along
+the specified coordinate.</em></h1>
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>Use the file selection widget described in <a href=
+"file.html">FILE</a>. Click the button to specify the "file
+coordinate" and then type in or select one of the files in the data
+set. After double-clicking on the entry (or clicking on the OK
+button) you will set a set of sliders showing the values of the
+"file coordinate" that IVE found. You can set the sliders choose
+any continuous subset of the files you would like. If you set the
+start value greater that the finish value, the coordinate will be
+used in IVE in descending order. When you are finished setting the
+sliders, click on the OK button again to finish reading in the data
+set information.</li>
+</ul>
+
+Command: 
+
+<ul>
+<li>MULTIPLE_READ=coordinate</li>
+
+<li>MULTIPLE_READ=-coordinate</li>
+
+<li>MULTIPLE_READ=coordinate,start,end</li>
+</ul>
+
+Arguments:
+
+<ul>
+<li>coordinate: is set to one of the following: 
+
+<ul>
+<li>"x", "y", "z", or "t", chooses the "file coordinate" along
+which to recombine data that has been written in a series of
+separate files. IVE checks if the current data file contains has
+the current value of "coordinate" in its alpha-numeric name. If so,
+IVE will look for other files in that directory whose names differ
+from that of the current data file by only a numerical constant.
+IVE will interpret the different numerical constants in this family
+of data files as the set of available values for "coordinate", and
+create a slider bar for this coordinate. Any any time a new field
+is requested IVE will read the data for that field from the entire
+family of individual files. (If the current data file name does not
+contain the value of this coordinate then only the specified file
+is read when a new field is requested.)</li>
+
+<li>"none": turns multiple read off.</li>
+</ul>
+</li>
+
+<li>start: the starting value of the file coordinate to use</li>
+
+<li>end: the ending value of the file coordinate to use</li>
+</ul>
+
+If start and end are not specified, IVE will read in all available
+files. If a "-" is in front of the coordinate value the files are
+read in by decreasing values of the file coordinate, otherwise they
+are read by increasing values. 
+
+<p>If start and end are specified, IVE will only read files within
+the specified range. If start &lt; end, then the files are read in
+by increasing values of the file coordinate, otherwise they are
+read by decreasing values. The "-" option should not be used to
+reverse the ordering of the input files when start and end values
+are specified.</p>
+
+<p>Examples:</p>
+
+<ul>
+<li>MULTIPLE_READ=t</li>
+</ul>
+
+In this example the multiple read coordinate is set to time.
+Suppose you then set the current file to be
+"/home/ive/data_1000_run.nc" using the widget or the <a href=
+"file.html">FILE</a> command, and that file contained variable U
+with a single time of value 1000. IVE will then look for other
+files of the form "/home/ive/data_*_run.nc" that have time values
+for "*". When you set the current field to "U" using the widget or
+the <a href="field.html">FIELD</a> command, IVE will read the
+values of U out of all of the proper files and act as if all the
+time values of U were in one file. 
+
+<p></p>
+
+<ul>
+<li>MULTIPLE_READ=z, 1000, 100</li>
+</ul>
+
+In this example the multiple read coordinate is set to Z. Suppose
+you then set the current file to be "/home/ive/data_1000_run.nc"
+using the widget or the <a href="file.html">FILE</a> command, and
+that file contained variable U with a single Z of value 1000. IVE
+will then look for other files of the form
+"/home/ive/data_*_run.nc" that have z values for "*" in the range
+of 1000 to 100. When you set the current field to "U" using the
+widget or the <a href="field.html">FIELD</a> command, IVE will read
+the values of U out of all of the proper files and act as if all
+the Z values of U were in one file. Plots with a Z axis will have Z
+decreasing along the axis.
+
+<p></p>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

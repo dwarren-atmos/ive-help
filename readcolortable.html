@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>READCOLORTABLE</title>
+</head>
+<body>
+<center>
+
+	sREADCOLORTABLE</h1>
+
+<em>This command reads in a new color table file to replace the
+current one (Colors will change immediately).</em> 
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>See <a href="color_fill.html">Color Fill</a>.</li>
+</ul>
+
+Command:
+
+<ul>
+<li>READCOLORTABLE = filename</li>
+</ul>
+
+Arguments : 
+
+<ul>
+<li>filename: filename can be the full pathname of any color table
+in the *.ctb format.</li>
+</ul>
+
+Examples : 
+
+<ul>
+<li>READCOLORTABLE = ~/specialcolors.ctb</li>
+</ul>
+
+Notes : 
+
+<ul>
+<li>The default is default.ctb in the ive lib directory.</li>
+
+<li>The IVE lib directory contains six color tables in addition to
+default.ctb: dark_light.ctb, light_dark.ctb, blue_red.ctb,
+green_blue_red.ctb, movie_blue_red.ctb, and rainbow.ctb.</li>
+
+<li>The default directory can be changed using the environment
+variable IVECTB.</li>
+
+<li>The "zero color" can be denoted in a colortable by surrounding
+the entry with two lines of 888,888,888. This entry will then be
+used for the first positive contour band, unless no-zero is
+selected or the colors are <a href=
+"lockcolortable.html">locked</a>.</li>
+</ul>
+
+<p>Example colortable (red, green, blue valuse from 0 to 254):</p>
+
+<p>68, 201, 140<br>
+51, 221, 168<br>
+22, 219, 237<br>
+33, 204, 237<br>
+25, 173, 237<br>
+25, 145, 249<br>
+0, 20, 255<br>
+102, 109, 247<br>
+127, 150, 255<br>
+142, 178, 255<br>
+181, 201, 255<br>
+214, 226, 237<br>
+<em>888, 888, 888</em><br>
+242, 221, 160<br>
+<em>888, 888, 888</em><br>
+239, 193, 130<br>
+237, 165, 107<br>
+242, 132, 68<br>
+221, 107, 66<br>
+204, 73, 66<br>
+237, 73, 66<br>
+</p>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

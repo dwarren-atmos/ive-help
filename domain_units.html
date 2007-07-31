@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>DOMAIN_UNITS</title>
+</head>
+<body>
+<center>
+
+	<em>This command lets you change the units that plot domain
+will be displayed in.</em></h1>
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>Using the right mouse button in the slicer widget, click on the
+Fixed/Free button next to the label of the dimention who's units
+you would like to change. A pop-up widget will appear that displays
+the current domain units. To change the units, move to the Display
+Units type-in box and enter the desired units. Use the left mouse
+button to click on the OK button to make the new units current, or
+click on CANCEL to revert to the original units.</li>
+</ul>
+
+Command:
+
+<ul>
+<li>DOMAIN_UNITS = units,units,units,units</li>
+</ul>
+
+Arguments : 
+
+<ul>
+<li>units: the desired domain display units for X,Y,Z,T (Commas are
+required as place holders)</li>
+</ul>
+
+Examples : 
+
+<ul>
+<li>DOMAIN_UNITS=,FT<br>
+ This changes the Y display units to feet.</li>
+
+<li>suppose that the dimention X has current display units of
+"m"(meters), but you want Y displayed in kilometers. Type "km" in
+the Display Units type-in box, then click on OK. The dimension X
+will subsequently be displayed in the units km.</li>
+</ul>
+
+Notes : 
+
+<ul>
+<li>This option remains in effect until changed.</li>
+
+<li>To use this feature, the dimension whose units will be changed
+must already have units assigned to it via an attribute entitled
+"display_units".</li>
+
+<li>Old units must be convertible into new units, or an error will
+result.</li>
+
+<li>This feature utilizes the Unidata units utility UDUNITS, which
+must be available on the system. For help on this utility, see the
+man page or the system administrator.</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

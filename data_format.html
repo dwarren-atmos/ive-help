@@ -1,0 +1,703 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>IVE Data Format</title>
+</head>
+<body>
+<center><img src="images/line.gif" width="90%"></center>
+
+<p>All data loaded into IVE must be in <a href=
+"http://www.unidata.ucar.edu/packages/netcdf/guide.txn_toc.html">netCDF</a>
+(network Common Data Form) format. The data can be either in a
+single file containing all desired data, or in <a href=
+"#multiple_files">multiple files</a> where each file contains the
+data for single value of a specified dimension and the alphanumeric
+file name includes the numerical value of the specified dimension
+(e.g. each file might contain the data for one time in an
+multi-time data set). The following document describes</p>
+
+<ul>
+<li><a href="#elements">Elements of the NetCDF File</a>, 
+
+<ul>
+<li><a href="#dimensions">Dimensions</a></li>
+
+<li><a href="#variables">Variables</a></li>
+
+<li><a href="#attributes">Attributes</a></li>
+
+<li><a href="#data">Data</a></li>
+</ul>
+</li>
+
+<li><a href="#multiple_files">Splitting Data into Multiple
+Files</a></li>
+
+<li><a href="#examples">Examples of IVE Compatible netCDF
+files</a>. 
+
+<ul>
+<li><a href="#simplest">Simplest File Contruct</a></li>
+
+<li><a href="#explicit">Explicit Specification of Physical Grid
+Point Locations</a></li>
+
+<li><a href="#implicit">Implicit Specification of Physical Grid
+Point Locations</a></li>
+
+<li><a href="#multiple_files_eg">Muliple Files</a></li>
+</ul>
+</li>
+</ul>
+
+<h2>Elements of the NetCDF File</h2>
+
+A netCDF file consists of four components: <a href=
+"#dimensions">dimensions</a>, <a href="#variables">variables</a>,
+<a href="#attributes">attributes</a>, and <a href="#data">data</a>.
+
+<p></p>
+
+<h3><a href=
+"http://www.unidata.ucar.edu/packages/netcdf/guide_4.html#SEC19">Dimensions</a></h3>
+
+IVE will slice and display data in four-dimensional arrays. The
+FORTRAN convention for writing such an array is
+<tt>`sample(nx,ny,nz,nt)'</tt> where, according to the FORTRAN
+standard, the first index varies most rapidly. The same array would
+be written in C as <tt>`sample(nt,nz,ny,nx)'</tt>. In the remainder
+of this section we will refer to the order of the array indices
+using the FORTRAN convention. The first three array indices are
+assumed to represent variations along three spatial coordinates;
+the fourth index represents time. It is not necessary that the
+actual data be four dimensional. For example, if the data depends
+only on x and z the netCDF array should be declared to be four
+dimensional, and ny and nt should both be set to 1. Whenever a
+dimension is set to 1, the slider associated with the corresponding
+ordinate will not appear in the window/slicer widget (except in the
+case of a data set in <a href="multiple_files">multiple files</a>).
+
+
+<p>Dimensions are declared in the first section of the netcdf file
+which begins with the keyword <tt>`dimensions'</tt> Two examples of
+the dimensions section of a netcdf file are:</p>
+
+<blockquote><tt>dimensions:</tt>
+<div style="margin-left: 2em"><tt>nx = 801 ;<br>
+ ny = 1 ;<br>
+ nz = 80 ;<br>
+ time = UNLIMITED ;</tt></div>
+</blockquote>
+
+a nd 
+
+<blockquote><tt>dimensions:</tt>
+<div style="margin-left: 2em"><tt>lat = 73 ;<br>
+ lon = 73 ;<br>
+ level = 10 ;<br>
+ time = UNLIMITED ;</tt></div>
+</blockquote>
+
+In both examples, the time dimension is unlimited, which allows the
+data to contain an arbitrary number of time levels. Only the last
+dimension in the data set can be unlimited. Observe that, as
+illustrated by the second example, the spatial coordinates need not
+be labeled x, y and z. 
+
+<h3><a href=
+"http://www.unidata.ucar.edu/packages/netcdf/guide_4.html#SEC20">Variables</a></h3>
+
+All data arrays contained in the netCDF file must be declared
+according to the netCDF standard by specifying each array's
+dimensions and the data type (such as <tt>`float'</tt> for floating
+point). Variables appear at the beginning of the netCDF file after
+the <tt>`variables'</tt> keyword. An example declaring the
+floating-point array <tt>`sample'</tt> is as follows: 
+
+<blockquote><tt>variables:</tt>
+<div style="margin-left: 2em"><tt>float sample
+(time,nz,ny,nx);</tt></div>
+</blockquote>
+
+Note that the unlimited dimension appears first and the order in
+which the dimensions are declared is opposite that used in standard
+FORTRAN. (The ordering is consistent with standard C.)
+
+<p></p>
+
+<h3><a href=
+"http://www.unidata.ucar.edu/packages/netcdf/guide_4.html#SEC22">Attributes</a></h3>
+
+NetCDF files contain two types of attributes: <em>global</em>
+attributes, which pertain to the data set as a whole, and <em>per
+field</em> attributes, which apply only to individual data fields.
+<em>Those attributes recognized by the default ive transforms are
+described below.</em> IVE can utilize netCDF files in which no
+attributes are specified. It is, however, necessary to specify at
+least some of the following attributes in order to flag missing
+data, or to indicate staggered mesh locations, or to describe the
+physical units associated with dimensional data. Additional
+attributes may appear in netCDF data sets, but these are ignored by
+the default IVE transforms. Customized IVE transform routines can,
+however, be written to recognize and use such additional
+attributes. 
+
+<p><em>Global Attributes</em></p>
+
+<p>The Global attributes define the size of the physical domain and
+the units in which to express and to display the physical
+coordinates. All unit names and conversions between units are
+defined via the Unidata program <a href=
+"http://www.unidata.ucar.edu/packages/udunits/index.html">udunits</a>.
+If no units are included in the attributes, IVE treats the data as
+dimensionless and assumes a spacing of one dimensionless unit
+between each data point along each coordinate axis. The global
+attributes recognized by IVE are as follows. In accordance with the
+netCDF standard, all global attributes begin with a colon.</p>
+
+<div style="margin-left: 2em">
+<dl>
+<dt><tt>:x_units</tt></dt>
+
+<dd>Physical units used for all computations along the 1st
+coordinate (e.g., meters denoted "m")</dd>
+
+<dt><tt>:x_delta</tt></dt>
+
+<dd>Grid interval along the 1st coordinate (in x_units)</dd>
+
+<dt><tt>:x_min</tt></dt>
+
+<dd>Minimum value of the 1st coordinate (in x_units)</dd>
+
+<dt><tt>:x_max</tt></dt>
+
+<dd>Maximum value of the 1st coordinate (in x_units)</dd>
+
+<dt><tt>:x_display_units</tt></dt>
+
+<dd>Units used in labeling the 1st coordinate axis (e.g.,
+kilometers denoted "km")</dd>
+
+<dt><tt>:x_label</tt></dt>
+
+<dd>Label used to describe the 1st coordinate (e.g., longitude).
+The first three letters of this label also replace "x" as the
+default label for the first coordinate slider in the window/slicer
+widget.</dd>
+
+<dt><tt>:y_units</tt></dt>
+
+<dd>Physical units used for all computations along the 2nd
+coordinate</dd>
+
+<dt><tt>:y_delta</tt></dt>
+
+<dd>Grid interval along the 2nd coordinate (in y_units)</dd>
+
+<dt><tt>:y_min</tt></dt>
+
+<dd>Minimum value of the 2nd coordinate (in y_units)</dd>
+
+<dt><tt>:y_max</tt></dt>
+
+<dd>Maximum value of the 2nd coordinate (in y_units)</dd>
+
+<dt><tt>:y_display_units</tt></dt>
+
+<dd>Units used in labeling the 2nd coordinate axis</dd>
+
+<dt><tt>:y_label</tt></dt>
+
+<dd>Label used to describe the 2nd coordinate</dd>
+
+<dt><tt>:z_units</tt></dt>
+
+<dd>Physical units used for all computations along the 3rd
+coordinate</dd>
+
+<dt><tt>:z_delta</tt></dt>
+
+<dd>Grid interval along the 3rd coordinate (in z_units)</dd>
+
+<dt><tt>:z_min</tt></dt>
+
+<dd>Minimum value of the 3rd coordinate (in z_units)</dd>
+
+<dt><tt>:z_max</tt></dt>
+
+<dd>Maximum value of the 3rd coordinate (in z_units)</dd>
+
+<dt><tt>:z_display_units</tt></dt>
+
+<dd>Units used in labeling the 3rd coordinate axis</dd>
+
+<dt><tt>:z_label</tt></dt>
+
+<dd>Label used to describe the 3rd coordinate</dd>
+
+<dt><tt>:t_units</tt></dt>
+
+<dd>Physical units used for all computations along the time
+coordinate</dd>
+
+<dt><tt>:t_delta</tt></dt>
+
+<dd>Grid interval along the time coordinate (in t_units)</dd>
+
+<dt><tt>:t_min</tt></dt>
+
+<dd>Minimum value of the time coordinate (in t_units)</dd>
+
+<dt><tt>:t_max</tt></dt>
+
+<dd>Maximum value of the time coordinate (in t_units)</dd>
+
+<dt><tt>:t_display_units</tt></dt>
+
+<dd>Units used in labeling the time coordinate axis</dd>
+
+<dt><tt>:t_label</tt></dt>
+
+<dd>Label used to describe the time coordinate</dd>
+</dl>
+</div>
+
+<p>If the <tt>`units'</tt> attribute is specified and the
+<tt>`display_units'</tt> attribute is omitted, the coordinate will
+be labeled using the physical units.</p>
+
+<p><em>Per Field Attributes</em></p>
+
+<p>The per field attributes define the physical domain over which
+each particular field is defined, the physical units in which the
+field is expressed, the units in which the variable is to be
+displayed and a flag for any missing data. Let <tt>`sample'</tt> be
+the name of a data field. All per field attributes begin with the
+characters <tt>`sample:'</tt> The global attributes recognized by
+IVE are as follows.</p>
+
+<div style="margin-left: 2em">
+<dl>
+<dt><tt>sample:units</tt></dt>
+
+<dd>Physical units associated with field <tt>`sample'</tt> (e.g.,
+meters per second denoted "m/s")</dd>
+
+<dt><tt>sample:display_units</tt></dt>
+
+<dd>Units used to label plots of field <tt>`sample'</tt> (e.g.,
+kilometers per hour denoted "km/hr")</dd>
+
+<dt><tt>sample:no_button</tt></dt>
+
+<dd>If this attribute is set to an integer value of `1', no button
+for the field <tt>`sample'</tt> will appear on the IVE widget
+showing the plotable variables. If <tt>sample:no_button</tt> is
+omitted or is not equal to `1', then a button for field
+<tt>`sample'</tt> will appear. The "no_button" feature is useful to
+hide data that might be used by IVE transform routines but doesn't
+need to be displayed. Even when <tt>sample:no_button=1</tt>, the
+field <tt>`sample'</tt> can still be loaded for visual display by
+typing <tt>field=sample</tt> on the command line.</dd>
+
+<dt><tt>sample:missing_value</tt></dt>
+
+<dd>floating-point value to flag missing data in field
+<tt>`sample'</tt></dd>
+
+<dt><tt>sample:x_min</tt></dt>
+
+<dd>Location along the 1st coordinate at which to plot the first
+data point for the field <tt>`sample'</tt> (in x_units). By default
+<tt>sample:x_min = x_min</tt>. Shifting <tt>sample:x_min</tt> to
+the right or left of <tt>x_min</tt> indicates that the field
+<tt>`sample'</tt> is defined on a staggered mesh.</dd>
+
+<dt><tt>sample:y_min</tt></dt>
+
+<dd>As per <tt>sample:x_min</tt>, but for the 2nd coordinate</dd>
+
+<dt><tt>sample:z_min</tt></dt>
+
+<dd>As per <tt>sample:x_min</tt>, but for the 3rd coordinate</dd>
+
+<dt><tt>sample:t_min</tt></dt>
+
+<dd>As per <tt>sample:x_min</tt>, but for the time coordinate</dd>
+</dl>
+</div>
+
+<h3><a href=
+"http://www.unidata.ucar.edu/packages/netcdf/guide_5.html#SEC24">Data</a></h3>
+
+The data contained in each variable (such as <tt>`sample'</tt>) is
+specified in the final section of the netCDF file as per the netCDF
+standard. 
+
+<h2>Splitting data into multiple files</h2>
+
+IVE allows a data set to be spread over several netCDF files. This
+allows the individual netCDF files to be smaller, and allows some
+control over how much of the multiple file data set is read into
+memory during an IVE session. 
+
+<p>In a multiple file data set the data is split along a "file
+coordinate," which is one of the four coordinates x, y, z or t.
+Each individual netCDF file contains all the data associated with a
+single value of the "file coordinate." That netCDF file must also
+contain the numerical value of the "file coordinate" in its
+alphanumeric name. Depending on the parameters set by the <a href=
+"multiple_read.html">MULTIPLE_READ</a> command, IVE will treat
+these netCDF files individually or combine selected files into a
+larger data set in a manner that is transparent to the user.</p>
+
+<h2>Examples of IVE compatible netCDF files</h2>
+
+<ul>
+<li><a href="#simplest">Simplest File Contruct</a></li>
+
+<li><a href="#explicit">Explicit Specification of Physical Grid
+Point Locations</a></li>
+
+<li><a href="#implicit">Implicit Specification of Physical Grid
+Point Locations</a></li>
+
+<li><a href="#multiple_files_eg">Muliple Files</a></li>
+</ul>
+
+<h3>Simplest File Construct</h3>
+
+The following is the header from a simple netCDF file containing
+two arrays <tt>`A(nx,ny,nz,nt)'</tt> and <tt>`B(nx,ny,nz,nt)'</tt>
+that will be plotted by IVE using the default transforms. 
+
+<blockquote><tt>netcdf simple {<br>
+<br>
+dimensions:</tt>
+<div style="margin-left: 2em"><tt>nx = 50 ;<br>
+ ny = 50 ;<br>
+ nz = 30 ;<br>
+ nt = 10 ;<br>
+ nt1 = 1 ;</tt></div>
+
+<p><tt>variables:</tt></p>
+
+<div style="margin-left: 2em"><tt>float A(nt,nz,ny,nx);<br>
+ float B(nt1,nz,ny,nx);<br>
+</tt></div>
+</blockquote>
+
+<p>(Note that the header information in an existing netCDF file may
+be obtained using the command <tt><a href=
+"http://www.unidata.ucar.edu/packages/netcdf/guide_12.html#SEC95">ncdump</a>
+-h filename</tt> ) No attributes are specified in this netCDF file.
+IVE uses nondimensional units to specify the domain for the field
+<tt>`A'</tt> as 1 &lt; x &lt; 50, 1 &lt; y &lt; 50, 1 &lt; z &lt;
+30, and 1 &lt; t &lt; 10. The domain for field <tt>`B'</tt> is
+identical to that for <tt>`A'</tt>, except that there is no time
+dependence. As a consequence, the time-coordinate slider will not
+appear in the window/slicer widget when field <tt>`B'</tt> is
+selected.</p>
+
+<h3>File With Explicit Specification of Physical Grid Point
+Locations</h3>
+
+<p>The following portion of a netCDF file contains five variables.
+A single four-dimensional data array
+<tt>`A(lat,lon,level,time)'</tt> contains the data to be plotted.
+Four one-dimensional arrays, <tt>`lat'</tt>, <tt>`lon'</tt>
+<tt>`level'</tt>, and <tt>`time'</tt> contain the coordinates of
+the physical grid. These coordinates may be irregularly spaced and
+may have attributes stating their physical units.</p>
+
+<blockquote><tt>netcdf explicit_grid{<br>
+<br>
+dimensions:</tt>
+<div style="margin-left: 2em"><tt>lon = 5;<br>
+ lat = 5;<br>
+ level = 5;<br>
+ time = 7;</tt></div>
+
+<p><tt>variables:</tt></p>
+
+<div style="margin-left: 2em"><tt>float A(time,level,lat,lon);<br>
+</tt>
+<div style="margin-left: 2em"><tt>A:units = "meters/second";<br>
+</tt></div>
+
+<p><tt>float lon(lon);<br>
+</tt></p>
+
+<div style="margin-left: 2em"><tt>lon:units = "degrees_east";<br>
+</tt></div>
+
+<p><tt>float lat(lat);<br>
+</tt></p>
+
+<div style="margin-left: 2em"><tt>lat:units = "degrees_north";<br>
+</tt></div>
+
+<p><tt>float level(level);<br>
+</tt></p>
+
+<div style="margin-left: 2em"><tt>level:units = "millibars";<br>
+</tt></div>
+
+<p><tt>float time(time);<br>
+</tt></p>
+
+<div style="margin-left: 2em"><tt>time:units = "hours";</tt></div>
+</div>
+
+<p><tt>//global attributes:</tt></p>
+
+<div style="margin-left: 2em"><tt>:x_label = "longitude";<br>
+ :y_label = "latitude";<br>
+ :z_label = "level";<br>
+ :t_label = "time";</tt></div>
+
+<tt>data:</tt>
+<div style="margin-left: 2em"><tt>lon = -180, -90, 0, 90, 180 ;<br>
+ lat = -90, 45, 0, 45, 90 ;<br>
+ level = 1000, 850, 700, 500, 300 ;<br>
+ time = 0, 2, 4, 6, 8, 10, 12 ;</tt></div>
+</blockquote>
+
+(The preceding lists both the netCDF header and the values of the
+"coordinate variables," i.e., variables that are also dimensions.
+This type of listing may be obtained from an existing netCDF file
+using the command <tt><a href=
+"http://www.unidata.ucar.edu/packages/netcdf/guide_12.html#SEC95">ncdump</a>
+-c filename</tt> . The double slash <tt>//</tt> precedes a comment
+line in the netCDF file.) 
+
+<p>IVE sets the the domain limits to match the first and last data
+point in each coordinate variable. In this example, the sliders in
+the window/slicer widget will show the limits -180 &lt; lon &lt;
+180, -90 &lt; lat &lt; 90, 1000 &gt; lev &gt; 300, and 0 &lt; tim
+&lt; 12. Note that IVE uses the first three letters in the name of
+the global <tt>label</tt> attributes to label the sliders. IVE
+recognizes <tt>`lon',`lat',`level'</tt> and <tt>`time'</tt> as
+coordinate variables and automatically treats them as if they had
+the attribute "no_button" set to `1'</p>
+
+<h3>File With Implicit Specification of Physical Grid Point
+Locations</h3>
+
+As the number of grid points in a data array increases, it becomes
+awkward to explicitly list the physical location of each coordinate
+point in the coordinate variable arrays. If the variables are
+evenly spaced, this can be avoided as per the following example. 
+
+<blockquote><tt>netcdf implicit_grid{<br>
+<br>
+dimensions:</tt>
+<div style="margin-left: 2em"><tt>lon = 101;<br>
+ lat = 101;<br>
+ level = 5;<br>
+ time = UNLIMITED ; //(7 currently)</tt></div>
+
+<p><tt>variables:</tt></p>
+
+<div style="margin-left: 2em"><tt>float A(time,level,lat,lon);<br>
+</tt>
+<div style="margin-left: 2em"><tt>A:units =
+"meters/second";</tt></div>
+
+<p><tt>float level(level);<br>
+</tt></p>
+
+<div style="margin-left: 2em"><tt>level:units =
+"millibars";</tt></div>
+
+<p><tt>float time(time);<br>
+</tt></p>
+
+<div style="margin-left: 2em"><tt>time:units = "hours";</tt></div>
+</div>
+
+<p><tt>//global attributes:</tt></p>
+
+<div style="margin-left: 2em"><tt>:x_min = -180.f;<br>
+ :x_max = 180.f;<br>
+ :x_units = "degrees_east";<br>
+ :x_label = "longitude";<br>
+</tt>
+<p><tt>:y_min = -90.f;<br>
+ :y_max = 90.f;<br>
+ :y_units = "degrees_north";<br>
+ :y_label = "latitude";<br>
+</tt></p>
+
+<p><tt>:z_label = "level";<br>
+ :t_label = "time";</tt></p>
+</div>
+
+<tt>data:</tt>
+<div style="margin-left: 2em"><tt>level = 1000, 850, 700, 500, 300
+;<br>
+ time = 0, 2, 4, 6, 8, 10, 12 ;</tt></div>
+</blockquote>
+
+<p>IVE uses the default transform routines to linearly interpolate
+between the array indices and the physical location along the x and
+y coordinates. Let `i' be the value of the first array index. Since
+<tt>:x_delta</tt> is not specified, `i' is mapped to a position
+along the x (or longitude) coordinate via the relation</p>
+
+<pre>
+       :x_min + (i-1)*(:x_max - :x_min)/(lon-1)
+</pre>
+
+The sliders in the window/slicer widget will look like those in the
+preceding example. The only difference is that the "lon" and "lat"
+sliders will not be subject to the "gravity" that forces the
+indicator to stop only at values corresponding to grid points that
+are actually present in the data set. Gravity is typically useful
+only when there are a small number of data points along the
+coordinate axis. 
+
+<p>If <tt>:x_delta</tt> were specified, `i' would be mapped to a
+position along the x (or longitude) coordinate via the relation</p>
+
+<pre>
+       :x_min + :x_delta*(i-1)
+</pre>
+
+If <tt>:x_delta</tt> and <tt>A:x_min</tt> were both specified, `i'
+would be mapped to a position along the x (or longitude) coordinate
+via the relation 
+
+<pre>
+       A:x_min + :x_delta*(i-1)
+</pre>
+
+which allows <tt>`A'</tt> to be staggered with respect to other
+fields along the 1st coordinate axis. 
+
+<h3>Multiple Files</h3>
+
+This is an example of <a href="#implicit">Implicit Specifiation</a>
+with time as the "file coordinate." The data is organized into
+three netCDF files containing the data at times 1000, 1500 and
+2000, respectively. The names of the netCDF files are data_1000.nc,
+data_1500.nc, and data_2000.nc. Here is the example for
+data_1500.nc: 
+
+<blockquote><tt>netcdf data_1500{<br>
+<br>
+dimensions:</tt>
+<div style="margin-left: 2em"><tt>lon = 101;<br>
+ lat = 101;<br>
+ level = 5;<br>
+ time = 1;</tt></div>
+
+<p><tt>variables:</tt></p>
+
+<div style="margin-left: 2em"><tt>float A(time,level,lat,lon);<br>
+</tt>
+<div style="margin-left: 2em"><tt>A:units =
+"meters/second";</tt></div>
+
+<p><tt>float level(level);<br>
+</tt></p>
+
+<div style="margin-left: 2em"><tt>level:units =
+"millibars";</tt></div>
+
+<p><tt>float time(time);<br>
+</tt></p>
+
+<div style="margin-left: 2em"><tt>time:units = "hours";</tt></div>
+</div>
+
+<p><tt>//global attributes:</tt></p>
+
+<div style="margin-left: 2em"><tt>:x_min = -180.f;<br>
+ :x_max = 180.f;<br>
+ :x_units = "degrees_east";<br>
+ :x_label = "longitude";<br>
+</tt>
+<p><tt>:y_min = -90.f;<br>
+ :y_max = 90.f;<br>
+ :y_units = "degrees_north";<br>
+ :y_label = "latitude";<br>
+</tt></p>
+
+<p><tt>:z_label = "level";<br>
+ :t_label = "time";</tt></p>
+</div>
+
+<tt>data:</tt>
+<div style="margin-left: 2em"><tt>level = 1000, 850, 700, 500, 300
+;<br>
+ time = 1500 ;</tt></div>
+</blockquote>
+
+<p>The data_1000.nc and data_2000.nc would have "time" set to 1000
+and 2000, respectively. If the same data set was used with a "file
+coordinate" of z, the file names would have been data_1000.nc,
+data_850.nc, data_700.nc, data_500.nc, and data_300.nc and the
+data_850.nc file would look as follows:</p>
+
+<blockquote><tt>netcdf data_850{<br>
+<br>
+dimensions:</tt>
+<div style="margin-left: 2em"><tt>lon = 101;<br>
+ lat = 101;<br>
+ level = 1;<br>
+ time = 3;</tt></div>
+
+<p><tt>variables:</tt></p>
+
+<div style="margin-left: 2em"><tt>float A(time,level,lat,lon);<br>
+</tt>
+<div style="margin-left: 2em"><tt>A:units =
+"meters/second";</tt></div>
+
+<p><tt>float level(level);<br>
+</tt></p>
+
+<div style="margin-left: 2em"><tt>level:units =
+"millibars";</tt></div>
+
+<p><tt>float time(time);<br>
+</tt></p>
+
+<div style="margin-left: 2em"><tt>time:units = "hours";</tt></div>
+</div>
+
+<p><tt>//global attributes:</tt></p>
+
+<div style="margin-left: 2em"><tt>:x_min = -180.f;<br>
+ :x_max = 180.f;<br>
+ :x_units = "degrees_east";<br>
+ :x_label = "longitude";<br>
+</tt>
+<p><tt>:y_min = -90.f;<br>
+ :y_max = 90.f;<br>
+ :y_units = "degrees_north";<br>
+ :y_label = "latitude";<br>
+</tt></p>
+
+<p><tt>:z_label = "level";<br>
+ :t_label = "time";</tt></p>
+</div>
+
+<tt>data:</tt>
+<div style="margin-left: 2em"><tt>level = 850 ;<br>
+ time = 1000, 1500, 2000 ;</tt></div>
+</blockquote>
+
+<p></p>
+
+<address><a href="index.html">back to index</a></address>
+
+<br>
+<br>
+</body>
+</html>
+

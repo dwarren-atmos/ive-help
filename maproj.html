@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>MAPROJ</title>
+</head>
+<body>
+<center><em>This command allows you to select a map projection, and
+is used in conjunction with the commands <a href=
+"plat.html">PLAT</a>, <a href="plon.html">PLON</a>, and <a href=
+"rota.html">ROTA</a>.</em> 
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>Select "Base map" from the "Plot Background" menu. When the Map
+Optons widget appears, use the left mouse button to click-and-hold
+on the Map Projection cascade menu button. Slide the indicator bar
+to the desired map projection, then release the mouse button. Note
+that for the first seven projections listed below, the map limits
+are gotten from the window limits. Map limits for other projections
+must be entered via the <a href="maplimits.html">MAPLIMITS</a>
+command.</li>
+</ul>
+
+Command:
+
+<ul>
+<li>MAPROJ = PROJECTION</li>
+</ul>
+
+Arguments : 
+
+<ul>
+<li>PROJECTION: valid choices for the map projection are 
+
+<ul>
+<li>NHST Northern Hemisphere polar stereographic</li>
+
+<li>SHST Southern Hemisphere polar stereographic</li>
+
+<li>NHOR Northern Hemisphere polar orthographic</li>
+
+<li>SHOR Southern Hemisphere polar orthographic</li>
+
+<li>ME Mercator</li>
+
+<li>CE Cylindrical equidistant</li>
+
+<li>MO Mollewide</li>
+
+<li>LC Lambert conformal</li>
+
+<li>ST Stereographic</li>
+
+<li>OR Orthographic</li>
+
+<li>LE Lambert equal-area</li>
+
+<li>GN Gnomic</li>
+
+<li>AE Azimuthal equidistant</li>
+
+<li>SV Satellite view</li>
+</ul>
+</li>
+</ul>
+
+Examples : 
+
+<ul>
+<li>MAPROJ = ME<br>
+ A Mercator projection is used, centered at latitide = 0 and
+longitude = 0.</li>
+</ul>
+
+Notes : 
+
+<ul>
+<li>The Default is cylindrical equidistant.</li>
+
+<li>The use of this command requires some familiarity with the NCAR
+Graphics EZMAP routines. For further information on setting the map
+projection, see the NCAR Graphics documentation on the EZMAP
+routine MAPROJ.</li>
+
+<li>This option remains in effect until changed.</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

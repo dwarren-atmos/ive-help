@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>Writing NetCDF Files for IVE</title>
+</head>
+<body>
+<center>
+<img src="images/line.gif" width="90%"></center>
+
+<h2>Writing Output from FORTRAN Code</h2>
+
+ <p>
+All data loaded into IVE must be in <a href=""
+"http://www.unidata.ucar.edu/packages/netcdf/index.html">netCDF</a>
+(network Common Data Form) format. Sample netCDF files for use with
+the default IVE transforms are described on the help page <a href=""
+"data_format.html">IVE Data Format</a>. The following will describe
+two ways of generating the netCDF file described in the third
+example of "IVE Data Format." 
+ </p>
+<h3>Creating Output Using CDL files and `ncgen'</h3>
+ <p>
+A <a href=""
+"http://www.unidata.ucar.edu/packages/netcdf/guide_4.html#SEC18">CDL</a>
+(network Common data form Description Language) file is an ASCII
+descripton of the binary data in a netCDF file that is designed to
+be easily read by humans. CDL files can be generated from netCDF
+files via the <a href=""
+"http://www.unidata.ucar.edu/packages/netcdf/guide_12.html#SEC95">`ncdump',</a>
+command. For example, 
+ </p>
+<blockquote><tt>ncdump -c sample.nc</tt></blockquote>
+ <p>
+generates the file <tt>`sample.cdl'</tt> that contains the file
+name, the dimensions, the specification of the variables, any
+attributes and the data for any "coordinate variables." A CDL file
+of this type is shown below. (This is the same CDL file shown in
+the third example of <a href="data_format.html">IVE Data
+Format</a>.) Note that the double slash indicates a comment in the
+CDL file. 
+
+</p>
+
+<blockquote><tt>netcdf implicit_grid{<br>
+<br>
+dimensions:</tt>
+<div style="margin-left: 2em"><tt>lon = 101;<br>
+ lat = 101;<br>
+ level = 5;<br>
+ time = UNLIMITED ; //(7 currently)</tt></div>
+
+<p><tt>variables:</tt></p>
+
+<div style="margin-left: 2em"><tt>float A(time,level,lat,lon);<br>
+</tt>
+<div style="margin-left: 2em"><tt>A:units =
+"meters/second";</tt></div>
+
+<p><tt>float level(level);<br>
+</tt></p>
+
+<div style="margin-left: 2em"><tt>level:units =
+"millibars";</tt></div>
+
+<p><tt>float time(time);<br>
+</tt></p>
+
+<div style="margin-left: 2em"><tt>time:units = "hours";</tt></div>
+</div>
+
+<p><tt>//global attributes:</tt></p>
+
+<div style="margin-left: 2em"><tt>:x_min = -180.f;<br>
+ :x_max = 180.f;<br>
+ :x_units = "degrees_east";<br>
+ :x_label = "longitude";<br>
+</tt>
+<p><tt>:y_min = -90.f;<br>
+ :y_max = 90.f;<br>
+ :y_units = "degrees_north";<br>
+ :y_label = "latitude";<br>
+</tt></p>
+
+<p><tt>:z_label = "level";<br>
+ :t_label = "time";</tt></p>
+</div>
+
+<tt>data:</tt>
+<div style="margin-left: 2em"><tt>level = 1000, 850, 700, 500, 300
+;<br>
+ time = 0, 2, 4, 6, 8, 10, 12 ;</tt></div>
+</blockquote>
+
+<p>The command <a href=""
+"http://www.unidata.ucar.edu/packages/netcdf/guide_12.html#SEC93">`ncgen'</a>
+is the inverse of `ncdump'; it converts an ASCII CDL file to a
+binary netCDF file. For example</p>
+
+<blockquote><tt>ncgen -o sample.nc sample.cdl</tt></blockquote>
+ <p>
+converts the CDL file <tt>`sample.cdl'</tt> to the netCDF file
+<tt>`sample.nc'</tt>. The easiest way to create a netCDF file is to
+(1) write all the header data (the name, dimensions, variable and
+attribute specifications, and the values of any coordinate
+variables) to a CDL file, (2) convert the CDL file to a netCDF file
+using ncgen, and (3) continue writing the main data arrays to this
+netCDF file. 
+</p>
+<p>The following example shows how this approach can be implemented
+in a FORTRAN program. The data set created is the one associated
+with the preceding CDL file. Everything except the data for the
+variables <tt>`A'</tt> and <tt>`time'</tt> are written to the
+original CDL file. This file is then converted to a netCDF file by
+`ncgen' and opened for further data input with <a href=""
+"http://www.unidata.ucar.edu/packages/netcdf/guide_7.html#SEC42">`ncopn'</a>.
+The data for <tt>`A'</tt> and <tt>`time'</tt> are subsequently
+written directly to the open netCDF file in a manner similar to
+that which would occur if output was periodically generated during
+a numerical simulation. The data written to <tt>`A'</tt> in this
+example are, however, completely artifical. Note how the use of the
+"UNLIMITED" option for the time dimension allows data to be written
+at an arbitrary number of output times.</p>
+
+<pre>
+<tt>     program netCDF_example1
+c
+c     -----------------------------------------------------------------
+c    Declare and set constants, parameters and scratch variables
+c     -----------------------------------------------------------------
+c
+      implicit none
+c
+c       UNIX include statement to include standard netCDF parameter
+c   names, such as NCWRITE. (path is for UW Unix machines)
+c
+      include '/usr/local/include/netcdf.inc'
+c
+c   Netcdf file declaration
+c
+      integer cdfid     ! ID for the netCDF file to be created
+      character *(*) cdf_out    ! Name of the netCDF output file
+      parameter(cdf_out='example.nc')
+c
+c       Declare and set integer values for the netCDF dimensions 
+c
+      integer 
+     &amp;    nlon          ! number of points in the 1st dimension;
+     &amp;   ,nlat          ! number of points in the 2nd dimension;
+     &amp;   ,nlevel        ! number of points in the 3rd dimension;
+      parameter(nlon = 101, nlat = 101, nlevel = 5)
+
+      real
+     &amp;    level(nlevel),    ! values of the z-coordinate;
+     &amp;    A(nlon, nlat, nlevel) ! 3D data array;
+      data level/1000, 850, 700, 500, 300/
+
+      integer 
+     &amp;    start(4)      ! for indexing the netCDF data array;
+     &amp;   ,count(4)      ! for indexing the netCDF data array;
+      real actual_time
+      data
+     &amp;    start /1, 1, 1, 1/, count /nlon, nlat, nlevel, 1/
+c      
+c       NetCDF IDs for variable that written out every time step
+c
+      integer 
+     &amp;    idtime        ! ID for the time coordinate variable;
+     &amp;   ,idA           ! ID for main data array, `A';
+c
+c       Declare scratch variables
+c
+      integer i, j, k, time_index, ierr
+      character*80 command
+c
+c     -----------------------------------------------------------------
+c   Create the CDL file that matches the preceding example,
+c       writing the result to file `my.cdl'
+c     -----------------------------------------------------------------
+c
+      open(unit=7, name='my.cdl')
+c
+c       Write the netCDF file name
+c
+      write(7,*) 'netcdf mine{'
+c
+c       Write the dimensions
+c
+      write(7,*) 'dimensions:'
+      write(7,*) 'lon=', nlon, ';'
+      write(7,*) 'lat=', nlat, ';'
+      write(7,*) 'level=', nlevel, ';'
+      write(7,*) 'time=UNLIMITED;'
+c
+c       Write the variable declarations along with
+c       their attributes
+c
+      write(7,*) 'variables:'
+      write(7,*) 'float A(time,level,lat,lon);'
+      write(7,*) 'A:units="meters/second";'
+      write(7,*) 'float level(level);'
+      write(7,*) 'level:units="millibars";'
+      write(7,*) 'float time(time);'
+      write(7,*) 'time:units="hours";'
+c
+c       Write the global attributes
+c
+      write(7,*) ':x_min=-180.f;'
+      write(7,*) ':x_max=180.f;'
+      write(7,*) ':x_units="degrees_east";'
+      write(7,*) ':x_label="longitude";'
+      write(7,*) ':y_min=-90.f;'
+      write(7,*) ':y_max=90.f;'
+      write(7,*) ':y_units="degrees_north";'
+      write(7,*) ':y_label="latitude";'
+      write(7,*) ':z_label="level";'
+      write(7,*) ':t_label="time";'
+c
+c       Begin writing the data
+c
+      write(7,*) 'data:'
+      write(7,*) 'level='
+      do i = 1, nlevel-1
+         write(7, *) level(i), ','
+      enddo
+      write(7, *) level(nlevel), ';'
+      write(7,*) '}'
+c
+      close (unit=7)
+c
+c     -----------------------------------------------------------------
+c   Convert the CDL file `my.cdl' to a netCDF file using ncgen
+c     -----------------------------------------------------------------
+c
+      write(command, *) 'ncgen -o ', cdf_out, ' my.cdl'
+      call system(command)
+c
+c     -----------------------------------------------------------------
+c       Write the remaining data, which consists of the values of 
+c       the variables `A' and `time' at seven different times
+c     -----------------------------------------------------------------
+c
+c       Open the new netcdf file 
+c
+      cdfid=<a href=""
+"http://www.unidata.ucar.edu/packages/netcdf/guide_7.html#SEC42">ncopn</a>(cdf_out, NCWRITE, ierr)
+c
+c     Get the variable ID's for A and time
+c
+      idtime=<a href=""
+"http://www.unidata.ucar.edu/packages/netcdf/guide_9.html#SEC58">ncvid</a>(cdfid, 'time'  , ierr)
+      idA=ncvid(cdfid, 'A'  , ierr)
+c
+c     -----------------------------------------------------------------
+c       Generate dummy data for 'time' and `A'. Write out this
+c       data to the netCDF file each time step.
+c     -----------------------------------------------------------------
+c
+c       This loop is executed for each time.
+c
+      do time_index = 1, 7
+
+         actual_time = (time_index-1)*2.
+         call <a href=""
+"http://www.unidata.ucar.edu/packages/netcdf/guide_9.html#SEC60">ncvpt1</a>(cdfid, idtime, time_index, actual_time, ierr)
+c
+c       Compute the variable A
+c
+         do k = 1, nlevel
+            do j = 1, nlat
+               do i = 1, nlon
+                  A(i, j, k) = float(time_index*((i+k))/float(j))
+               enddo
+            enddo
+         enddo
+         start(4) = time_index
+c
+c          Write data tp `A'
+c
+         call <a href=""
+"http://www.unidata.ucar.edu/packages/netcdf/guide_9.html#SEC61">ncvpt</a>(cdfid, idA , start, count, A , ierr)
+      enddo
+c
+c     -----------------------------------------------------------------
+c       Close the netCDF file
+c     -----------------------------------------------------------------
+c
+      call <a href=""
+"http://www.unidata.ucar.edu/packages/netcdf/guide_7.html#SEC45">ncclos</a>(cdfid, ierr)
+c
+      stop
+      end
+
+</tt>
+</pre>
+
+
+<address><a href="index.html">back to index</a></address>
+
+</body>
+</html>
+

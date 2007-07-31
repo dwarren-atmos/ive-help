@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>MAPLIMITS</title>
+</head>
+<body>
+<center><em>This command allows you to set the limits of the map
+projection.</em> 
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>There is currently no widget interface to this command.</li>
+</ul>
+
+Command:
+
+<ul>
+<li>MAPLIMITS = LIMITS,LIM1,LIM2,LIM3,LIM4,LIM5,LIM6</li>
+</ul>
+
+ARGUMENTS : 
+
+<ul>
+<li>LIMITS: specifies whether the arguments lim1-lim6 indicate the
+limits of the map based on corner points, points on the edge of the
+map, angles, or the maximum useful area of the map.</li>
+
+<li>LIM1-LIM6: arguments specifying the map limits. The meaning of
+these arguments and the number required are dependent on the value
+of limits.</li>
+</ul>
+
+Examples : 
+
+<ul>
+<li>MAPLIMITS = MA<br>
+ the maximum useful area produced by the projection is plotted. The
+argumenss lim1-lim6 are ignored.</li>
+</ul>
+
+Notes : 
+
+<ul>
+<li>The default is MA.</li>
+
+<li>The use of this command requires some familiarity with the NCAR
+Graphics EZMAP routines. For further information on setting map
+limits, see the NCAR Graphics documentatain on the EZMAP routine
+MAPSET.</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

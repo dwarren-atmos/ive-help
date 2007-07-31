@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>LOCKCOLORTABLE</title>
+</head>
+<body>
+<center><em>This command allows you to lock the color table to
+specific contour values.</em> 
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>Select the 'Shift Colors' option from the "Color Table" menu to
+bring up the Color Options form. 
+
+<ul>
+<li>To lock -After making your plot press the button associated
+with the Lock Color Table line (It should say Free). The button
+will then indicate that the color table is locked.</li>
+
+<li>To free -Press the button associated with the Lock Color Table
+line so that it changes to indicate that the color table is free,
+or change either the contour interval or the field.</li>
+</ul>
+</li>
+</ul>
+
+Command:
+
+<ul>
+<li>LOCKCOLORTABLE=[free/lock]</li>
+
+<li>LOCKCOLORTABLE=contour-value,colortable-entry<br>
+</li>
+</ul>
+
+Arguments : 
+
+<ul>
+<li>The following are valid arguments 
+
+<ul>
+<li>LOCK - locks the colortable based on the current plot.</li>
+
+<li>FREE - frees the colortable.</li>
+
+<li>CONTOUR-VALUE,COLORTABLE-ENTRY -allows you to link a specific
+color to a contour level.</li>
+</ul>
+</li>
+</ul>
+
+Examples : 
+
+<ul>
+<li>LOCKCOLORTABLE = LOCK</li>
+
+<li>LOCKCOLORTABLE = 2.5,40</li>
+</ul>
+
+Notes : 
+
+<ul>
+<li>Locking requires you to first specify a contour interval and a
+field (selecting contour values automatically locks the color
+table).</li>
+
+<li>You must also make a plot before locking the colors.</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>ZLOCATION</title>
+</head>
+<body>
+<center>
+
+	<em>This command "fixes" the Z coordinate at a specified
+value.</em></h1>
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>From the Window/Slicer Widget, click on the box next to the Z
+coordinate until it displays the word "Fixed". Then, using the
+slider bar provided, select the Z location you desire. Or click
+until the word "Average" and set the range of the average. Or click
+until the word "Free". (For a diagram of the Window/Slicer Widget,
+see <a href="2d_plots.html">Producing a 2D Scalar Plot</a>, <a
+href="1d_plots.html">Producing a 1D Scalar Plot</a>, or <a href=
+"vector_plots.html">Producing a Vector Plot</a>).</li>
+</ul>
+
+Command:
+
+<ul>
+<li>ZLOCATION=value</li>
+</ul>
+
+Arguments:
+
+<ul>
+<li>value: one of the following: 
+
+<ul>
+<li>a number: this fixes the Z coordinate to that value and reduces
+the number of coordinates that will be allowed to vary in your
+plot.</li>
+
+<li>"surface": the lowest level of data is plotted.</li>
+
+<li>"average": an average in Z will be plotted. The range of the
+average is the window value in Z (see <a href=
+"window.html">WINDOW</a>).</li>
+
+<li>"free" the Z coordinate is no longer locked to one value or an
+average, increasing the number of coordinates that will be allowed
+to vary in your plot.</li>
+</ul>
+</li>
+</ul>
+
+Examples:
+
+<ul>
+<li>ZLOCATION=10</li>
+
+<li>ZLOCATION=average</li>
+
+<li>ZLOCATION=surface</li>
+
+<li>ZLOCATION=free</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+
+Notes: ZLOCATION can only be set to "surface" via the command line.
+It cannot be set to "surface" with a widget.
+</body>
+</html>
+

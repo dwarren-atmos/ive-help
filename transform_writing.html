@@ -1,0 +1,650 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>Writing Transforms for IVE</title>
+</head>
+<body>
+<center><img src="images/line.gif" width="90%"></center>
+
+<p>The "transform" subroutine library is the method for users to
+link their own code into IVE. The transform routines handle such
+things as array index to physical coordinate transformations and
+the calculation of user-derived fields. Users need not supply IVE
+with a complete set of customized transform routines; IVE will use
+the default version of any transform subroutine that does not
+appear in the user's package of customized routines. Customized
+transform packages may be loaded automatically by setting the
+environment variable 'IVETRANSFILE' to the full path name of the
+file containing the customized transforms. Transform routines can
+also be loaded at any time during an IVE session using the command
+<a href="transform_file.html">TRANSFORM_FILE</a> .</p>
+
+<p>The following is the list of standard transform subroutines that
+may be called during an IVE session. The default IVE transform
+package is available in both C and Fortran. To download the default
+transform package, click <a href=
+"ftp://ftp.atmos.washington.edu/ive/default.tar.Z">HERE</a>.</p>
+
+<h2>IVE Transform Subroutines</h2>
+
+<em>NEW_FILE</em> 
+
+<blockquote>This routine is called every time a new file is read
+in. IVE passes the routine the id of the open netCDF file. The
+routine can then read any data or attributes off the netCDF file.
+Quantities that are read by the default version of
+<tt>`new_file'</tt> include the global attributes and the data in
+coordinate variables. Customized versions of <tt>`new_file'</tt>
+might read additional data fields such as an array of bottom
+topography or auxillary data to be used in calculating derived
+fields.</blockquote>
+
+<em>NEW_FIELD</em> 
+
+<blockquote>This routine is called every time a new field is
+specified. Before calling <tt>`new_field'</tt> IVE reads in the
+variable and its attributes IVE passes the routine the name of the
+field, the data values and the dimensions of the data array. This
+routine can be used to get and store the physical coordinate values
+for use by the coordinate transform routines. This routine also can
+be used to reorder the data array and dimensions.</blockquote>
+
+<em>INDEX_2_PHYS</em> 
+
+<blockquote>This routine is used to convert from array indices to
+physical coordinates. IVE provides a vector containing the array
+indices The routine should return the corresponding physical
+coordinates.</blockquote>
+
+<em>PHYS_2_INDEX</em> 
+
+<blockquote>This routine is used to convert from physical
+coordinates to array indices. IVE provides a vector containing the
+physical coordinates. The routine should return the corresponding
+array indices. A negative index indicates that this data point
+should be assigned the missing value (e.g. a point under the
+terrain) .</blockquote>
+
+<em>HORIZ_TER</em> 
+
+<blockquote>This routine is used to provide IVE with an array of
+terrain heights for a horizontal cross-section. If you have no
+terrain, this routine should return an array of
+zeroes.</blockquote>
+
+<em>VERT_TER</em> 
+
+<blockquote>This routine is used to provide IVE with an array of
+terrain heights for a vertical cross-section. If you have no
+terrain, this routine should return an array of
+zeroes.</blockquote>
+
+<em>PHYS_2_LONLAT</em> 
+
+<blockquote>This routine is used to convert from physical
+coordinates to longitude-latitude coordinates for the purposes of
+drawing maps. IVE provides a vector containing the physical
+coordinates. This routine should return the corresponding
+longitude-latitude coordinates.</blockquote>
+
+<em>LONLAT_2_PHYS</em> 
+
+<blockquote>This routine is used to convert from longitude-latitude
+coordinates to physical coordinates for the purposes of drawing
+maps. IVE provides a vector containing the longitude-latitude
+coordinates. This routine should return the corresponding physical
+coordinates.</blockquote>
+
+<em>DEFAULT_MAP</em> 
+
+<blockquote>This routine returns the map settings when the default
+map is specified in IVE.</blockquote>
+
+<em>DATA_SLICER_1D</em> 
+
+<blockquote>This routine returns the computational points at which
+a 1d slice should be taken. This is used if IVE cannot figure out
+on its own which points to use. Normally, IVE will try to space
+points evenly in computational space if possible. If data_slicer_1d
+is not available, IVE will evenly space the points in physical
+space.</blockquote>
+
+<em>DATA_SLICER_2D</em> 
+
+<blockquote>This routine returns the computational points at which
+a 2d slice should be taken. This is used if IVE cannot figure out
+on its own which points to use. Normally, IVE will try to space
+points evenly in computational space if possible. If data_slicer_2d
+is not available, IVE will evenly space the points in physical
+space.</blockquote>
+
+<em>DATA_SLICER_3D</em> 
+
+<blockquote>This routine returns the computational points at which
+a 3d slice should be taken. This is used if IVE cannot figure out
+on its own which points to use. Normally, IVE will try to space
+points evenly in computational space if possible. If data_slicer_3d
+is not available, IVE will evenly space the points in physical
+space.</blockquote>
+
+<em><a href="calc_field.html">CALC_FIELD</a></em> 
+
+<blockquote>This routine is used to give the user the ability to
+compute their own derived fields. IVE provides the name of the
+field requested by the user. The routine computes the derived field
+and returns it.</blockquote>
+
+<em>HEADING</em> 
+
+<blockquote>This routine allows the users to change the main
+headings on a plot.</blockquote>
+
+<em>FILE_COORDINATE</em> 
+
+<blockquote>This routine allows the users to change the current
+value of the file coordinate used for reading a variable over
+multiple files (see the <a href=
+"multiple_read.html">MULTIPLE_READ</a> command and the section <a
+href="data_format.html#multiple_files">"Splitting data into
+multiple files"</a> in <a href="data_format.html">IVE Data
+Format</a> for more details).</blockquote>
+
+<em>Miscellaneous</em> 
+
+<blockquote>Users may include any other routines they need as part
+of the computations for the transform routines. If you start the
+name of the routine, or any common blocks, with "t_", they will not
+conflict with the name of any IVE external.</blockquote>
+
+<h2>Calling IVE subroutines from the transforms</h2>
+
+You may need to call IVE subroutines as part of the transforms. The
+following is a list of useful routines (Fortran callable): 
+
+<ul>
+<li><a name="getvar"><strong>function getvar(var_name, ndims, dims,
+stagger, phmin, phmax, missing, data_units, display_units,
+dim_names, flag)</strong><br>
+</a> This routine returns a pointer to the memory location where
+the specified variable is stored. If it is not currently in memory
+and it exists in the netCDF file, it is read into memory. If the
+variable does not exist in the netCDF, getvar tries to calculate
+it, which may involve a call to calc_field. The newly computed
+variable will NOT have a button in the main IVE widget. Users
+should be careful when using this routine in calc_field not to end
+up in an infinite loop of calc_field calls. Several other pieces of
+information about the variable are also returned in the arrays
+ndims, stagger, min, max, missing, data_units, display_units and
+dim_names. 
+
+<center>
+<table border="1">
+<tr valign="top" align="center">
+<td></td>
+</tr>
+
+<tr valign="top">
+<td>&#30;var_name</td>
+<td>&#30;character</td>
+<td>&#30;input</td>
+<td>&#30;variable name</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;ndims</td>
+<td>&#30;integer</td>
+<td>&#30;output</td>
+<td>&#30;number of dimensions</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;dims</td>
+<td>&#30;integer</td>
+<td>&#30;output</td>
+<td>&#30;an array of dimensions</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;stagger</td>
+<td>&#30;real</td>
+<td>&#30;output</td>
+<td>&#30;an array with the grid staggering for each dimension</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;phmin</td>
+<td>&#30;real</td>
+<td>&#30;output</td>
+<td>&#30;an array of minimums in physical space for each
+dimension</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;phmax</td>
+<td>&#30;real</td>
+<td>&#30;output</td>
+<td>&#30;an array of maximums in physical space for each
+dimension</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;missing</td>
+<td>&#30;real</td>
+<td>&#30;output</td>
+<td>&#30;missing value</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;data_units</td>
+<td>&#30;character</td>
+<td>&#30;output</td>
+<td>&#30;data units</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;display_units</td>
+<td>&#30;character</td>
+<td>&#30;output</td>
+<td>&#30;desired units for data display</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;dim_names</td>
+<td>&#30;character</td>
+<td>&#30;output</td>
+<td>&#30;an array containing the names of the dimensions for this
+variable. Can be either existing names from the netCDF file or new
+names.</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;flag</td>
+<td>&#30;logical</td>
+<td>&#30;in/out</td>
+<td>&#30;on input .true. -&gt; write error message if variable is
+not found or computed. On output .true. -&gt; new memory was
+allocated for this variable.</td>
+</tr>
+</table>
+</center>
+</li>
+
+<li><strong>function addvar(var_name, button_name, ndims, dims,
+stagger, phmin, phmax, missing, data_units, display_units,
+dim_names, flag)</strong><br>
+ This routine is similiar to getvar. The difference is that a new
+button with the name "button_name" is created if necessary, for the
+variable "var_name". The calling sequence is the same as getvar,
+with the additional parameter button_name: 
+
+<center>
+<table border="1">
+<tr valign="top" align="center">
+<td></td>
+</tr>
+
+<tr valign="top">
+<td>&#30;button_name</td>
+<td>&#30;character</td>
+<td>&#30;input</td>
+<td>&#30;name of the button for this field.</td>
+</tr>
+</table>
+</center>
+
+<p></p>
+</li>
+
+<li><strong>function getrarr(name, value, size, error)</strong><br>
+ This routine gets the named IVE real array. The parameters are: 
+
+<center>
+<table border="1">
+<tr valign="top" align="center">
+<td></td>
+</tr>
+
+<tr valign="top">
+<td>&#30;name</td>
+<td>&#30;character</td>
+<td>&#30;input</td>
+<td>&#30;name of IVE array</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;value</td>
+<td>&#30;real</td>
+<td>&#30;output</td>
+<td>&#30;the array to receive the values</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;size</td>
+<td>&#30;integer</td>
+<td>&#30;input</td>
+<td>&#30;the size of array "value"</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;error</td>
+<td>&#30;integer</td>
+<td>&#30;output</td>
+<td>&#30;if non-zero =&gt; could not get array</td>
+</tr>
+</table>
+</center>
+
+<p>The corresponding routine <strong>setrarr</strong> stores named
+IVE real array variables. The following are IVE real arrays that
+may be of interest:</p>
+
+<center>
+<table border="1">
+<tr valign="top" align="center">
+<td></td>
+</tr>
+
+<tr valign="top">
+<td>&#30;plmin</td>
+<td>&#30;domain minimum in physical coordinates (4)</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;plmax</td>
+<td>&#30;domain maximum in physical coordinates (4)</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;phmin</td>
+<td>&#30;minimum physical coordinates for current field (4)</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;phmax</td>
+<td>&#30;maximum physical coordinates for current field (4)</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;stag</td>
+<td>&#30;grid staggering for current field (4)</td>
+</tr>
+</table>
+</center>
+
+<p>There is also <strong>getaarr</strong> and
+<strong>setaarr</strong> which gets and stores IVE character
+arrays. The following are IVE character arrays that may be of
+interest:</p>
+
+<center>
+<table border="1">
+<tr valign="top" align="center">
+<td></td>
+</tr>
+
+<tr valign="top">
+<td>&#30;domain_units</td>
+<td>&#30;the units of the domain physical coord. (4)</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;domain_units_display</td>
+<td>&#30;the current units used to display phys. coord. (4)</td>
+</tr>
+
+<tr valign="top">
+<td>&#30;domain_units_display_orig</td>
+<td>&#30;the original units used to display phys. coord. (4)</td>
+</tr>
+</table>
+</center>
+</li>
+
+<li><strong>getlvar(name, value, error)</strong><br>
+ This routine gets the named IVE logical variables. The parameters
+are: 
+
+<center>
+<table border="1">
+<tr valign="top" align="center">
+<td><b></b></td>
+</tr>
+
+<tr valign="TOP">
+<td>&#30;name</td>
+<td>&#30;character</td>
+<td>&#30;input</td>
+<td>&#30;name of IVE variable</td>
+</tr>
+
+<tr valign="TOP">
+<td>&#30;value</td>
+<td>&#30;logical</td>
+<td>&#30;output</td>
+<td>&#30;the value of the variable</td>
+</tr>
+
+<tr valign="TOP">
+<td>&#30;error</td>
+<td>&#30;integer</td>
+<td>&#30;output</td>
+<td>&#30;if non-zero =&gt; could not get array</td>
+</tr>
+</table>
+</center>
+
+<p>The corresponding routine setlvar stores the named IVE logical
+variable. The following are IVE logical variables that may be of
+interest:</p>
+</li>
+
+<li><strong>read_from_nc</strong><br>
+ Whether the last variable read in was read from the netCDF file or
+was already in memory (or was a calculated field)</li>
+
+<li><strong>make_help_widget(string)</strong><br>
+ This routine pops up a window containing the specified character
+string. This is used to display error messages to the user.</li>
+</ul>
+
+<h2>Programming considerations for writing transforms in
+FORTRAN</h2>
+
+Some of the routines above (for example read_var) deal with
+pointers to arrays. Standard FORTRAN does not have a concept of
+pointers. The Sun and DEC FORTRAN compilers have extensions that
+allow primitive pointer manipulations. The problem is that FORTRAN
+wants to deal with the arrays and variables themselves, not the
+pointers. Getting to the object a pointer reference is called
+"dereferencing a pointer". The method for dereferencing a pointer
+"p" is to use the built in function "%val(p)". However, this
+function can only be used in a subroutine or function call, i.e. 
+
+<pre>
+    call junk(%val(p))
+</pre>
+
+Subroutine "junk" can then work with the object to which p points.
+If "p" points to an array, you should also pass to "junk" the array
+dimensions for use by junk. As an example of this procedure,
+examine at the FORTRAN version of the default transform discussed
+below and see how a pointer to a 1D array is dereferenced in the
+function "t_val". 
+
+<h2>Examples</h2>
+
+There are currently two examples of transforms. The first example
+consists of the default transforms. The default transforms are
+sufficiently flexible to handle several types of netcdf files. The
+second example consists of the transforms to handle real time
+Numerical Product grids from NMC. 
+
+<p><strong>EXAMPLE 1: THE DEFAULT TRANSFORMS</strong></p>
+
+<p>default.c and default.f are C and Fortran versions of the
+default transforms. The default transforms and IVE can handle the
+following types of <a href="data_format.html">netCDF files:</a></p>
+
+<ul>
+<li>A plain netCDF file with four dimensional arrays (C/netCDF
+style A[nt,nz,ny,nx], Fortran style A(nx,ny,nz,nt)). In this case,
+the physical coordinates are the array indices. The domain limits
+are set to be the largest value of each dimension of the four
+dimensional arrays, and the sliders will show the limits x: 1 to
+nx, y: 1 to ny, z: 1 to nz, t: 1 to nt. If any dimension has a
+value of 1, the slider for that dimension will not appear.</li>
+
+<li>A netCDF file with four dimensional arrays and one dimensional
+variables with the same name as the dimensions. In this case the
+"dimension" variables are used to define the physical coordinates.
+These "dimension variables" may be irregularly spaced. The domain
+limits are set to be the values corresponding to the largest value
+of each dimension of the four dimensional array. The file can also
+contain a mix of dimensions matching this method and method 1
+above.</li>
+
+<li>A netCDF file with the following attributes defined ([] =&gt;
+optional): 
+
+<pre>
+    Global: domxmin, domxmax [, x_units, x_display_units]
+        domymin, domymax [, y_units, y_display_units]
+        domzmin, domzmax [, z_units, z_display_units]
+        domtmin, domtmax [, t_units, t_display_units]
+<br>
+     Per Field: xmin, xmax  [, units, display_units]
+        ymin, ymax  [, units, display_units]
+        zmin, zmax  [, units, display_units]
+        tmin, tmax  [, units, display_units]
+                [missing_data]
+</pre>
+
+The default transforms use linear interpolation to compute
+transformations between physical space and array indices. Let xminB
+and xmaxB denote the values of the "per field" attributes xmin and
+xmax of the FORTRAN array B. Then B(i,?,?,?) will be plotted at the
+x-location 
+
+<blockquote>xminB + (i-1)*(xmaxB-xminB)/(nx-1)</blockquote>
+
+with respect to the interval (domxmin, domxmax). The grid
+intervals, delta_x, delta_y, delta_z and delta_t must be uniform in
+order for the data to be displayed without distortion. 
+
+<p>It is possible to mix the techniques for domain specification
+discussed in examples 1-3 to describe the physical range of
+different coordinates. For example, one could specify dom*min and
+dom*max for x,y, and z and provide a one dimensional array listing
+discrete values for t (i.e., specify t according to the preceding
+method #2).</p>
+
+<p>The following is an example of the header section of this third
+type of netcdf file:</p>
+
+<pre>
+      
+netcdf steep_c_hst {
+dimensions:
+    nx = 801 ;
+    ny = 1 ;
+    nz = 80 ;
+    nxp1 = 802 ;
+    time = UNLIMITED ; // (8 currently)
+
+variables:
+    float time(time) ;
+        time:units = "s" ;
+    float theta(time, nz, ny, nx) ;
+        theta:units = "degK" ;
+        theta:display_units = "degK" ;
+        theta:xmin = 0.f ;
+        theta:zmin = 50.f ;
+        theta:xmax = 160000.f ;
+        theta:zmax = 7950.f ;
+        theta:missing_data = 9.9999994e+31f ;
+    float p(time, nz, ny, nx) ;
+        p:units = "Pa" ;
+        p:display_units = "millibars" ;
+        p:xmin = 0.f ;
+        p:zmin = 50.f ;
+        p:xmax = 160000.f ;
+        p:zmax = 7950.f ;
+        p:missing_data = 9.9999994e+31f ;
+    float u(time, nz, ny, nxp1) ;
+        u:units = "m/s" ;
+        u:display_units = "m/s" ;
+        u:xmin = -100.f ;
+        u:zmin = 50.f ;
+        u:xmax = 160100.f ;
+        u:zmax = 7950.f ;
+        u:missing_data = 9.9999994e+31f ;
+    float w(time, nz, ny, nx) ;
+        w:units = "m/s" ;
+        w:display_units = "cm/s" ;
+        w:xmin = 0.f ;
+        w:zmin = 0.f ;
+        w:xmax = 160000.f ;
+        w:zmax = 7900.f ;
+        w:missing_data = 9.9999994e+31f ;
+
+// global attributes:
+        :domxmin = 0.f ;
+        :domzmin = 0.f ;
+        :domxmax = 160000.f ;
+        :domzmax = 8000.f ;
+        :x_units = "m" ;
+        :z_units = "m" ;
+        :x_display_units = "km" ;
+        :z_display_units = "km" ;
+
+data:
+
+ time = 300 , 600 , 900 , 1200 , 1500 , 1800 , 2100 , 2400 ;
+}
+</pre>
+
+In this example, the sliders will show the limits x : 0 to 160
+(km), y : no slider, z: 0 to 8 (km), t:300 to 2400 (sec). The
+y-coordinate slider is omitted because ny=1 (in which case domymin
+and domymax, although they may be specified in the netcdf file, are
+irrelevant). The t-coordinate slider is specified according to the
+technique in example two. 
+
+<p>Note also that the "dimensions" section of the preceding netcdf
+header contains the additional parameter nxp1, which is used to
+increase the first (FORTRAN) dimension of the variable "u" by 1
+with respect to the other variables. As evident from the "per
+variable" values of xmin and xmax, the data in the array "u" are
+staggered 100 m along the x-coordinate with respect to the data in
+the arrays "theta", "p" and "w". The "w" array is also staggered 50
+m along the z-coordinate with respect to the data in the arrays
+"theta", "p" and "u".</p>
+</li>
+</ul>
+
+<strong>EXAMPLE 2: TRANSFORMS FOR NMC GRIDS</strong> 
+
+<p>nps.c is the transform used to handle the real time (HDS/NPS)
+grids from NMC. The extra features in these transforms are:</p>
+
+<ul>
+<li>The forecast time (frtime) dimension/variable is not sorted.
+The transform sorts frtime, returns the correct limits for that
+dimension, and reorders the variables read from the netCDF so they
+are in time increasing order.</li>
+
+<li>Some fields are 3 dimensional: longitude, latitude and frtime.
+IVE requires fields to have the following dimensions: x, y, z, t.
+The transforms supply the missing vertical coordinate with a
+dimension of one, which tells IVE that it is missing.</li>
+
+<li>Interpolations in the vertical are done in log P rather than
+linear P.</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

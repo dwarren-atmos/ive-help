@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>Looping</title>
+</head>
+<body>
+<center>
+
+	<em>This section discusses how to generate, view, and dump IVE
+loops.</em></h1>
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>The Build Loop option in IVE allows you to create a series of
+frames along any fixed coordinate in your data set. These loops can
+be animated in the interactive IVE display and/or dumped to a set
+of graphics files.</p>
+
+<h3>Loop Requirements:</h3>
+
+<ul>
+<li>Before constructing a loop, it is necessary to create a sample
+plot (see <a href="2d_plots.html">Producing a 2D Scalar Plot</a>,
+<a href="1d_plots.html">Producing a 1D Scalar Plot</a>, or <a href=
+"vector_plots.html">Producing a Vector Plot</a>).</li>
+
+<li>For color-filled loops, make sure that the color table is
+locked before proceeding to the Build Loop option (see <a href=
+"lockcolortable.html">LOCKCOLORTABLE</a>).</li>
+</ul>
+
+<h3>Building and Viewing a Loop:</h3>
+
+<ol>
+<li><em>IVE Main Window:</em> Click on the Build Loop box to bring
+up the Loop Setup widget. (Typing the appropriate <a href=
+"loop.html">LOOP</a> parameters at the command line automatically
+builds the loop and allows you to skip to step 3). 
+
+<p><a href="images/main1.gif"></a></p>
+
+<center><img src="images/main1.gif" alt=
+"Diagram of IVE Main Window" border="0"></center>
+
+<center><i>IVE Main Window</i></center>
+
+<br>
+<br>
+</li>
+
+<li><em>Loop Setup Window:</em> IVE displays your fixed coordinates
+along the top of the Loop Setup window. With the left mouse button,
+click on the diamond-shaped button that corresponds to the
+coordinate that you wish to vary in a loop. Then, select start and
+end values of that coordinate by dragging the slider bars with the
+left mouse button. Finally, position the mouse arrow on the
+Increment box, input the desired interval between each loop frame,
+and hit the &lt;RETURN&gt; key. This increment value determines the
+number of frames in the loop. Click on Go to generate the loop and
+activate the Loop Control window. 
+
+<p><a href="images/loop_setup.gif"></a></p>
+
+<center><img src="images/loop_setup.gif" alt=
+"Sample Loop Setup Window" border="0"></center>
+
+<center><i>Loop Setup Window</i></center>
+
+<br>
+<br>
+</li>
+
+<li><em>Loop Control Window:</em> Click the Run box once to view
+the loop. Three loop directions are available: forward, backward,
+and cycle. Choose the direction of the loop by clicking on the
+Direction box with the left mouse button. To adjust the speed of
+the loop, drag the Loop Delay slider to the desired value. To pause
+between loops, increase the beginning pause or end pause value. 
+
+<p><a href="images/loop_control.gif"></a></p>
+
+<center><img src="images/loop_control.gif" alt=
+"Loop Control Window" border="0"></center>
+
+<center><i>Loop Control Window</i></center>
+
+<br>
+<br>
+ 
+
+<p>IVE also contains a manual loop feature. During loop execution,
+click the middle mouse button on the graphic display. This pauses
+the loop. Now, use the left and right mouse buttons to scroll
+backward and forward through the loop. Clicking the middle mouse
+button again resumes the loop. This manual loop feature is also
+performed in the Loop Control window by clicking the left mouse
+button on Run and scrolling with the Step arrows.</p>
+</li>
+</ol>
+
+<h3>Dumping a Loop:</h3>
+
+<ul>
+<li>This function saves a loop as a series of graphics files in GIF
+or XWD format. In the Loop Control widget, select Dump with the
+left mouse button. This activates the Dump window. Now, select the
+graphics format (GIF or XWD) by clicking on the Type box. Enter the
+desired filename for the loop under "Selection". Click on OK to
+save the loop and return the the Loop Control window. 
+
+<p><a href="images/loop_dump.gif"></a></p>
+
+<center><img src="images/loop_dump.gif" alt="Loop Dump Window"
+border="0"></center>
+
+<center><i>Dump Window</i></center>
+
+<br>
+<br>
+ <em>EXAMPLE:</em> Typing "yes.##" under on the Selection line
+saves your loop as the files yes.01, yes.02, yes.03, etc.<br>
+<br>
+</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

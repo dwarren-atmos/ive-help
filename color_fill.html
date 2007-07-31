@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>Color Fill</title>
+</head>
+<body>
+<center><em>This section provides complete instructions for
+creating color-filled plots in IVE.</em>
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Once you have created a color, 2D, scalar plot (see <a href=
+"2d_plots.html">Producing a 2D Scalar Plot</a>), you may control
+the color fill options using the "Color Table" menu. From the IVE
+Main Window, select "Color Table." This reveals the following
+choices: <b>Display Table</b>, <b>Edit Table</b>, <b>New Table</b>,
+and <b>Shift Colors</b>.</p>
+
+<ul>
+<li><b>Display Table:</b> This command opens the Color Bar Window,
+displaying the color table that is currently active in your IVE
+session. The Color Bar Window assigns a number to each color, and
+is therefore useful for editing color tables. To close the Color
+Bar Window, simply click on "Display Table" a second time.</li>
+</ul>
+
+<ul>
+<li><b>Edit Table:</b> This choice allows you to edit the active
+color table. Upon selecting Edit Table, you are given the two
+options: Edit RGB and Edit HSL. 
+
+<center><a href="images/edit.gif"><img src="images/edit.gif"
+border="0" alt="Edit Table Menu"></a></center>
+
+<p>The Edit RGB Popup (below left) allows you to mix colors by
+varying the intensity of Red, Green, or Blue. On the other hand,
+the Edit HSL Popup (below right) window varies the hue, saturation,
+and intensity values.</p>
+</li>
+</ul>
+
+<center><img src="images/edit_rgb.gif" alt="EDIT_RGB Popup" border=
+"1"> <img src="images/edit_hsl.gif" alt="EDIT_HSL Popup" border=
+"1"></center>
+
+<center><i>Edit RGB Popup / Edit HSL Popup</i></center>
+
+<div style="margin-left: 2em">You may use either the Edit RGB Popup
+or the Edit HSL Popup to create custom color tables. Here's how: 
+
+<ul>
+<li>Using the "Display Table" function, activate the Color Bar
+Window. The Color Bar Window assigns numbers to each color in the
+table, facilitating the editing process.</li>
+
+<li>Use the Color Table Entry bar in the Edit Popup to select the
+number of the color you wish to edit. Once you have selected a
+color, it is displayed in the left half of the palette located at
+the top of the Edit Popup. Now, adjust the three mixer bars until
+the right half of the palette displays the new color you want.
+Click on the "Apply" button to activate the change.</li>
+
+<li>To delete a color from a color table, make sure that its number
+is displayed at the Color Table Entry bar and click once on the
+"delete" button.</li>
+
+<li>If you wish to insert a color, look on the Color Bar Window to
+determine the number of the color that is located to the
+<b>right</b> of the point of insertion. Use the Color Table Entry
+bar in the Edit popup to display this number. Now, mix the new
+color and click on the "Insert" button.</li>
+
+<li>To undo all changes you have made to the active color table,
+choose the "Reset" button in the Edit popup.</li>
+
+<li>Once you finish editing a table, you can save it to your
+directory (see <a href=
+"writecolortable.html">WRITECOLORTABLE</a>).</li>
+</ul>
+</div>
+
+<ul>
+<li><b>New Table:</b> The Default Color Table is automatically
+applied at the beginning of each IVE session and remains active
+until a different table is read. To read a color table, click on
+"New Table" in the Color Table menu. This activates the New Table
+Menu as shown in the Figure Below:</li>
+</ul>
+
+<center><a href="images/new.gif"><img src="images/new.gif" border=
+"0" alt="New Table Menu"></a></center>
+
+<div style="margin-left: 2em">In the New Table Menu, there are
+seven IVE color tables. These tables can be used to create either
+color or grayscale plots.
+
+<ul>
+<li><em>Color Plots</em><br>
+The five color tables available in IVE for creating color plots are
+Default, Blue/Red, Green/Blue/Red, Movie Blue/Red, and Rainbow
+(shown below).</li>
+</ul>
+</div>
+
+<p><a href="images/default.gif"></a></p>
+
+<center><img src="images/default.gif" width="400" height="50" alt=
+"Default color table" border="0"></center>
+
+<center><i>Default Color Table</i></center>
+
+<br>
+<br>
+ 
+
+<p><a href="images/blue_red.gif"></a></p>
+
+<center><img src="images/blue_red.gif" width="400" height="50" alt=
+"Blue/Red color table" border="0"></center>
+
+<center><i>Blue/Red Color Table</i></center>
+
+<br>
+<br>
+ 
+
+<p><a href="images/green_blue_red.gif"></a></p>
+
+<center><img src="images/green_blue_red.gif" width="400" height=
+"50" alt="Green/Blue/Red color table" border="0"></center>
+
+<center><i>Green/Blue/Red Color Table</i></center>
+
+<br>
+<br>
+ 
+
+<p><a href="images/movie_blue_red.gif"></a></p>
+
+<center><img src="images/movie_blue_red.gif" width="400" height=
+"50" alt="Movie Blue/Red color table" border="0"></center>
+
+<center><i>Movie Blue/Red Color Table</i></center>
+
+<br>
+<br>
+ 
+
+<p><a href="images/rainbow.gif"></a></p>
+
+<center><img src="images/rainbow.gif" width="400" height="50" alt=
+"Rainbow color table" border="0"></center>
+
+<center><i>Rainbow Color Table</i></center>
+
+<br>
+<br>
+ 
+
+<div style="margin-left: 2em">
+<ul>
+<li><em>Grayscale Plots</em><br>
+The Dark/Light and Light/Dark color tables (pictured below) can be
+used to create grayscale plots. However, grayscale plots created
+with these color tables often produce low quality photocopies. For
+this reason, IVE contains a grayscale stippling option for filling
+2D plots (refer to <a href="2d_plots.html">Producing a 2D Scalar
+Plot</a>).</li>
+</ul>
+</div>
+
+<p><a href="images/dark_light.gif"></a></p>
+
+<center><img src="images/dark_light.gif" width="400" height="50"
+alt="Dark/Light table" border="0"></center>
+
+<center><i>Dark/Light Table</i></center>
+
+<br>
+<br>
+ 
+
+<p><a href="images/light_dark.gif"></a></p>
+
+<center><img src="images/light_dark.gif" width="400" height="50"
+alt="Light/Dark table" border="0"></center>
+
+<center><i>Light/Dark Table</i></center>
+
+<br>
+<br>
+ 
+
+<ul>
+<li style="list-style: none">You may also choose to read a
+user-created color table from your directory. To read a custom
+color table, simply select "Custom Table" from the New Table Menu.
+This activates a widget which allows you to select any color table
+of the format *.ctb from your directory (see also <a href=
+"readcolortable.html">READCOLORTABLE</a>).</li>
+
+<li><b>Shift Colors:</b> This is the last option in the Color Table
+menu. It allows you to vary the color legend by shifting the color
+table. For example, if you want negative values shaded blue and
+positive values shaded red, the Color Options Window (displayed
+below) allows you to slide the color table so that the zero contour
+corresponds to the transition between red and blue. To open the
+widget, select "Shift Colors" from the Color Table menu.</li>
+</ul>
+
+<center><a href="images/shift_colors.gif"><img src=
+"images/shift_colors.gif" alt="Color Options Window" border="0">
+</a></center>
+
+<center><i>Color Options Window</i></center>
+
+<br>
+<br>
+ 
+
+<div style="margin-left: 2em">The following functions are performed
+in the Color Options Window: 
+
+<ul>
+<li>Slide Color Table: Click on the left and right arrow buttons to
+vary the color legend of the plot.</li>
+
+<li>Lock Color Table: Once the color table is optimally positioned,
+"Lock Color Table" locks the table in place. This is especially
+useful for creating successive plots, such as in a loop (see <a
+href="lockcolortable.html">LOCKCOLORTABLE</a>).</li>
+
+<li>Reset: The "Reset" button slides the color table back to its
+original position.</li>
+
+<li>"Toggle Background" allows you to select either black or white
+as a background for your plot.</li>
+
+<li>Color Bar: If the active color table is not already displayed
+at the bottom of your screen, clicking on the "Color Bar" button
+activates the Color Bar Window (see the "Display Table" section
+above).</li>
+</ul>
+</div>
+
+<address><a href="index.html">back to index</a></address>
+
+<br>
+<br>
+</body>
+</html>
+

@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>Producing a Vector Plot</title>
+</head>
+<body>
+<center>
+
+	<em>This document provides instructions for building vector
+plots.</em></h1>
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<h3>Procedures:</h3>
+
+<ul>
+<li>First, load a data file by selecting "Input" from the IVE Main
+Window, or by typing <a href="file.html">FILE</a> at the command
+line. This activates the Window/Slicer Widget depicted below.</li>
+
+<li>Next select a <a href="field.html">FIELD</a>.</li>
+
+<li>At the Window/Slicer Widget (shown below), "fix" all
+coordinates except for the two variables that will become the
+ordinate and the abscissa in your plot. Adjust the coordinate
+values as desired.</li>
+</ul>
+
+<center><a href="images/window_slicer.gif"><img src=
+"images/window_slicer.gif" alt="Window/Slicer Widget" border="0">
+</a></center>
+
+<center><i>Window/Slicer Widget</i></center>
+
+<br>
+<br>
+ 
+
+<ul>
+<li>Then, make sure that "Vector Plot" is displayed in the IVE Main
+Window (see <a href="type.html">TYPE</a>).</li>
+</ul>
+
+<center><a href="images/vectmain.gif"><img src=
+"images/vectmain.gif" alt="IVE Main Window" border="0">
+</a></center>
+
+<center><i>IVE Main Window</i></center>
+
+<ul>
+<li>Next, specify the attributes of your plot using the Properties
+Window (pictured below). The Properties Window contains the
+following options for vector plots:</li>
+</ul>
+
+<center><a href="images/vectprop.gif"><img src=
+"images/vectprop.gif" alt="Properties Window for a vector field"
+border="0"></a></center>
+
+<center><i>Properties Window</i></center>
+
+<ul>
+<li>Display: Click on the appropriate button to select either
+Vectors or Streamlines for your plot.</li>
+
+<li>Horizontal and Vertical Components: Here, you must represent
+the values of the vector components using either a single field
+variable or a mathematical expression in terms of the field
+variables. For example, to plot a temperature gradient field, the
+horizontal component could be expressed as D[T:X] and the vertical
+component could be expressed as D[T:Z].</li>
+
+<li>Maximum Value: The Maximum Value scales all vectors in your
+field to the distance between plotted gridpoints (see <a href=
+"vector_max.html">VECTOR_MAX</a>).</li>
+
+<li>Locked: This option allows you to lock the Maximum Value so
+that it remains fixed during successive plots. It is useful when
+creating loops of vector plots.</li>
+
+<li>Position of Grid Point on Vector: This selection determines the
+position of each vector relative to the grid point. Three options
+are available: Tail, Head, and Center.</li>
+
+<li>Axis properties: The axis scales and tic intervals can be
+specified as in any other IVE plot.</li>
+
+<li>Gridpoint spacing: By varying the values of the slider bars in
+the Properties Window, you control the spacing of the vectors both
+horizontally and vertically (see also <a href=
+"vector_interval.html">VECTOR_INTERVAL</a>). By varying the spacing
+of the vectors vertically, you also vary the magnitudes of the
+displayed vectors.</li>
+
+<li>Finally, when all parameters have been set, click on "New Plot"
+in the IVE Main Window to display the plot, or "Overlay Plot" to
+overlay an existing plot (see <a href="plot.html">PLOT</a> and <a
+href="overlay_plot.html">OVERLAY PLOT</a>).</li>
+</ul>
+
+<h3>Example:</h3>
+
+<ul>
+<li>Pictured below is a sample vector plot produced by IVE:</li>
+</ul>
+
+<center><img src="images/vector_plot.gif" border="1" width=
+"95%"></center>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

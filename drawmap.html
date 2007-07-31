@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>DRAWMAP</title>
+</head>
+<body>
+<center>
+
+	<em>With this command, contour plots can be produced which are
+overlayed on map projections.</em></h1>
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>Select "Base Map" from the "Plot Background" menu. When the Map
+Optons widget appears, use the left mouse button to click on the
+Draw Map toggle button. The value of this button will toggle
+between YES (the plot will be overlayed on a map background) and NO
+(the plot will be displayed without a map background).</li>
+</ul>
+
+Command:
+
+<ul>
+<li>DRAWMAP = choice</li>
+</ul>
+
+Arguments : 
+
+<ul>
+<li>choice: choice may be either ON or OFF. If choice = ON, all
+subsequent plots will be displayed on the map background specified
+by the command <a href="maproj.html">MAPROJ</a>. If choice = OFF,
+all subsequent plots will be displayed without a map
+background.</li>
+</ul>
+
+Examples : 
+
+<ul>
+<li>DRAWMAP = OFF<br>
+ Plots are displayed without a map background.</li>
+</ul>
+
+Notes : 
+
+<ul>
+<li>if a map projection has not previously been selected, the plot
+will be drawn on a Cylindrical Equidistant map projection. this
+option remains in effect until changed</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>FILE</title>
+</head>
+<body>
+<center><em>This command is used to specify a data file to be read
+When a data file is specified it will be opened, and the names of
+the variables in the file will be displayed as buttons at the
+bottom of the main widget.</em> 
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>Select "Data File" from the "File" menu A file selection widget
+will appear. You will see boxes for the current file filter, the
+subdirectories of the directory specified by the file filter, and
+the files specified by the file filter. There is also a type-in box
+if you want to type in your commands. To use the file filter, move
+the mouse pointer to the Filter type-in box, and type in your
+choice. Press &lt;RETURN&gt; after you have finished typing. You
+can use the filter to screen out all but the files that you prefer
+to see. For example, if your data files all are of the form
+model_1000.dat, you can set the filter to screen out all other
+files by using model*.dat as the filter. To select a directory or
+file, move to the appropriate box and double-click on your
+selection. If needed, use the horizontal or vertical scroll bars.
+Note that as you change the filter or select new directories or
+file names, the changes are reflected in the Selection type-in box.
+When you have made your selection the specified data file will be
+read, and field buttons will appear at the bottom of the main
+widget.</li>
+
+<li>See <a href="multiple_read.html">MULTIPLE_READ</a> for an
+explanation of the dimension buttons at the bottom of the file
+selection widget. The default is "NONE" - the data is all in one
+file.</li>
+</ul>
+
+Command:
+
+<ul>
+<li>FILE = file_name</li>
+</ul>
+
+Arguments : 
+
+<ul>
+<li>file_name: valid choices for file_name are any netCDF file
+written in the format expected by the graphics package. The full
+path name must be entered unless the environment variable IVEDAT
+has been defined. In that case the path name specified by IVEDAT
+will be assumed unless the filename begins with a /.</li>
+</ul>
+
+Examples : 
+
+<ul>
+<li>FILE = ~/data/model.dat</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

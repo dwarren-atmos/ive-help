@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>Diagnostic Computations Using the Subroutine
+CALC_FIELD</title>
+</head>
+<body>
+<center>
+
+	<em>This document provides instructions for programming new
+diagnostic fields in the subroutine CALC_FIELD</em></h1>
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>CALC_FIELD is an IVE <a href=
+"transform_writing.html">transform</a> subroutine. By modifying
+CALC_FIELD, you can link your own code to IVE in order to compute
+diagnostic field variables other than the fields in the original
+netCDF file. CALC_FIELD is especially useful for calculating fields
+that will be used frequently or fields that are too complicated to
+define at the IVE command line (see <a href=
+"computations.html">Diagnostic Computations Using the Command
+Line</a>).</p>
+
+<p>The CALC_FIELD routine can be programmed in either C or Fortran
+(To download the default transform package for IVE, refer to <a
+href="transform_writing.html">Writing Transforms for IVE</a>). In
+this document, we particularly focus on programming CALC_FIELD in
+Fortran rather than in C, since Fortran requires the use of pointer
+variables that allocate memory for field data storage. A number of
+Fortran-callable IVE subroutines are available for calculating
+diagnostic variables in CALC_FIELD. Among these subroutines, the
+most important is <a href=
+"transform_writing.html#getvar">GETVAR</a>. GETVAR returns a
+pointer to the memory location where a specified diagnostic varable
+is stored. It allows recursion within the CALC_FIELD routine such
+that the data stored in one memory location may be calculated from
+data stored in other memory locations. This makes GETVAR a powerful
+tool. The following code is a sample Fortran version of CALC_FIELD
+that demonstrates the use of the GETVAR routine:</p>
+
+<ul>
+<li>
+<h3>Sample CALC_FIELD Computation</h3>
+
+The first section of code shown below declares the function
+CALC_FIELD and its arguments. This portion of CALC_FIELD is
+intended to remain unmodified.</li>
+</ul>
+
+<pre>
+c
+      pointer function calc_field(name, ndims, dims, stag, min, max,
+     &amp;     missing, data_units, data_display_units, dim_names)
+c 
+c     calc_field : This routine is used to calculate user-derived fields.
+c     The return value of the routine is a pointer to the field values.
+c     NULL return =&gt; cannot calculate.
+c     
+c     Arguments:
+c     name  character   The name of the field to derive.
+c     ndims integer     Number of dimensions in field (output).
+c     dims  integer     Number of points in the field in Fortran
+c               order (x, y, z, t) (output).
+c     stag  real        Grid staggering per dimension (output).
+c     min   real        Physical space minimum per dimension (output).
+c     max   real        Physical space maximum per dimension (output).
+c     missing   real        Missing data value, zero =&gt; none (output).
+c     data_units
+c       character   Units for field (output).
+c     data_display_units
+c       character   Units to use to display field (output).
+c     dim_names character   Names of the dimensions in the field (output).
+c
+      integer ndims, dims(4)
+      real    stag(4), min(4), max(4), missing
+      character*(*) name, data_units, data_display_units, dim_names(4)
+c
+</pre>
+
+<div style="margin-left: 2em">Following the above CALC_FIELD
+declarations, you may insert the code for your own calculation. For
+example, say you have temperature and pressure fields, and you want
+to calculate the potential temperature: 
+
+<center>THETA = T*(1000/P)**0.286</center>
+
+<p>There are TWO ways to code the new field variable THETA in the
+CALC_FIELD routine:</p>
+
+<div style="margin-left: 2em">
+<h4>1. First Approach</h4>
+
+The first approach is to pass GETVAR a mathematical expression
+identical to that which could be entered directly on the IVE
+command line using the <a href="field.html">FIELD</a> command (see
+<a href="computations.html">Diagnostic Computations Using the
+Command Line</a>).</div>
+</div>
+
+<pre>
+c
+      ibeg = strbeg(name)  ! These commands find the beginning and ending
+      iend = strend(name)  !  characters in the variable "name".
+      if (name(ibeg:iend) .eq. 'THETA') then
+c
+c     The following command returns a pointer to the memory location where
+c     the field 'THETA' will be stored.  Note that it is necessary to use
+c     IVE syntax in the mathematical expression for THETA.
+c
+          calc_field = getvar('T*(1000/P)^0.286', ndims, dims, stag, min,
+     &amp;                      max, missing, data_units, data_display_units,
+     &amp;              dim_names, flag)
+          return
+      endif
+c
+      return
+      end ! CALC_FIELD
+c
+</pre>
+
+<div style="margin-left: 4em">In this example,
+"FIELD=T*(1000/P)^0.286, THETA" could have been entered at the IVE
+command line to define the potential temperature field. However,
+adding the above code to CALC_FIELD would enable IVE to
+automatically recognize THETA as a diagnostic variable. Thus, the
+CALC_FIELD subroutine allows you to streamline your IVE sessions
+and avoid typographical errors in frequently evaluated functions. 
+
+<p></p>
+
+<h4>2. Second Approach</h4>
+
+Some field calculations are too complex to code at the IVE command
+line. For example, performing a field variable integration would
+require the user to loop through the array values. Such
+manipulations are very involved and are only feasible by grabbing
+the field variables and programming the calculations yourself. A
+simple example of this second approach is shown below: (Again, we
+will calculate THETA and we will assume that T and P are on the
+same grid. If T and P were not on the same grid, it would be
+necessary to interpolate the field values using the interpolation
+operator '@' defined in <a href="computations.html">Diagnostic
+Computations Using the Command Line</a>.)</div>
+
+<pre>
+c
+      pointer t, p
+      float pmissing
+c 
+      ibeg = strbeg(name)  ! These commands find the beginning and ending
+      iend = strend(name)  !  characters in the variable "name".
+      if (name(ibeg:iend) .eq. 'THETA') then
+          p = getvar('P', ndims, dims, stag, min, max,
+     &amp;               pmissing, data_units, data_display_units,
+     &amp;               dim_names, flag)  !  Here, getvar returns a pointer
+                       !   to the memory location where
+                       !   the field 'P' is stored.
+c 
+          if (p .eq. 0) then  ! This 'if' loop flags user when 'P' missing  
+              make_help_widget('THETA - cannot get P') 
+              calc_field = 0
+              return
+          endif
+c
+c    Here, getvar returns a pointer to the memory location where the field
+c      'T' is stored:
+          t = getvar('T', ndims, dims, stag, min, max, missing,
+     &amp;            data_units, data_display_units, dim_names, flag)
+          if (t .eq. 0) then  ! This 'if' loop flags user when 'T' missing  
+              make_help_widget('THETA - cannot get T')
+              calc_field = 0
+              return
+          endif
+c 
+          num = dims(1) * dims(2) * dims(3) * dims(4)
+          calc_field = getmem(num)  ! This command allocates array memory.
+          if (calc_field .eq. 0) then  ! This 'if' loop flags user when
+                           !  the memory cannot be allocated.
+           make_help_widget('THETA - cannot allocate memory');
+           calc_field = 0
+               return
+          endif
+c 
+          do i = 1, num
+               t1 = r_val(%val(t), i)  ! These commands return the i-th 
+               p1 = r_val(%val(p), i)  !  data value in the arrays p &amp; t
+               if (t1 .eq. missing .or. p1 .eq. missing) then
+c         If the i-th value in either p or t is missing, the
+c         following command stores the value 'missing' in the
+c         i-th value of the array THETA
+c
+                   call s_val(%val(calc_field), i, missing) 
+c
+               else
+c         If the data is not missing, we calculate the i-th value
+c         of the array THETA
+c
+                   call s_val(%val(calc_field), i, t1*(1000/p1)**0.286)
+               endif
+          enddo
+          return
+      endif
+c      
+      return
+      end ! CALC_FIELD
+c
+</pre>
+
+<div style="margin-left: 4em">The second approach above grabs the
+arrays P and T using the subroutine GETVAR. It then loops through
+the arrays and computes THETA at each grid point. More complicated
+diagnostic field computations are feasible with this
+approach.</div>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

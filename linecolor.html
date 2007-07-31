@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>LINECOLOR</title>
+</head>
+<body>
+<center><em>This command allows you to choose contour line colors
+different from the default colors.</em> 
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>From the "Custom Lines" menu select the "Color" submenu. Then
+select one of: "Both", "Pos", "Neg" or "Default". If you did not
+select Default you continue on and select a color (see <a href=
+"custom_lines.html">Custom Lines</a>).</li>
+</ul>
+
+Command:
+
+<ul>
+<li>LINECOLOR = color,color</li>
+</ul>
+
+Arguments : 
+
+<ul>
+<li>color: at least one line color, and possibly two, may be
+entered. The first color specifies the color used for contour lines
+whose value &gt; 0, and the second specifies the color used for
+contour lines whose value &lt; 0. If only one color is specified,
+that color is used for all contour lines. valid choices for color
+are : 
+
+<ul>
+<li>RED</li>
+
+<li>BLUE</li>
+
+<li>GREEN</li>
+
+<li>VIOLET</li>
+
+<li>BROWN</li>
+
+<li>BLACK</li>
+
+<li>WHITE</li>
+
+<li>DEFAULT</li>
+</ul>
+</li>
+</ul>
+
+Examples : 
+
+<ul>
+<li>LINECOLOR = GREEN,YELLOW<br>
+ produces a plot where the contour lines &lt;= 0 are green and the
+contour lines &gt; 0 are yellow.</li>
+
+<li>LINECOLOR = DEFAULT<br>
+ contour lines are drawn in their default colors; contour lines
+&lt;= 0 are blue, and contour lines &gt; 0 are red.</li>
+</ul>
+
+Notes : 
+
+<ul>
+<li>This option remains in effect until changed.</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

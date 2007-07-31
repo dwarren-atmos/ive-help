@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>TRANSFORM_FILE</title>
+</head>
+<body>
+<center>
+
+	<em>This command is used to specify a transform file to be
+read.</em></h1>
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>Select "Transform File" from the "File" menu. A file selection
+widget will appear. When you have made your selection, the
+specified transform file will be read.</li>
+</ul>
+
+Command:
+
+<ul>
+<li>TRANSFORM_FILE=FILE_NAME</li>
+</ul>
+
+Arguments : 
+
+<ul>
+<li>FILE_NAME: The full or relative path name of any compiled IVE
+transform file</li>
+</ul>
+
+Examples : 
+
+<ul>
+<li>TRANSFORM_FILE = ~/trans/trans_model</li>
+</ul>
+
+Notes: 
+
+<ul>
+<li>If the coordinate surfaces of your data are curved, you must
+first supply IVE with a TRANSFORM FILE. Transforms map your
+curvilinear coordinates to a rectangular Cartesian grid.</li>
+
+<li>The transform file name can also be specified using the
+environment variable IVETRANSFILE (see <a href=
+"environment.html">Environment Variables</a>).</li>
+
+<li>The IVETRANS environment variable can be used to specify a
+directory for the widget to search in (see <a href=
+"environment.html">Environment Variables</a>).</li>
+
+<li>Refer to <a href="transform_writing.html">Writing Transforms
+for IVE</a> for information on writing your own transform
+routines.</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

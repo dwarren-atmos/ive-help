@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>Overview of IVE</title>
+</head>
+<body>
+<center><img src="images/line.gif" width="90%"></center>
+
+<p>IVE (Interactive Visualization Environment) is a software
+package designed to interactively display and analyze gridded data.
+IVE assumes the data to be displayed are contained in one-, two-,
+three- or four-dimensional arrays. By default, the numbers within
+these arrays are assumed to represent grid point values of some
+field variable (such as pressure) on a rectangular evenly spaced
+grid. IVE is, nevertheless, capable of displaying data on arbitrary
+curvilinear grids.</p>
+
+<p>If the data points are not evenly spaced on a rectangular grid,
+IVE must be informed of the grid structure, either by specifying
+"attributes" in the data input or by specifying the coordinate
+transform in a user supplied subroutine. Stretched rectangular
+grids (which occur when the stretching along a given coordinate is
+a function only of the value of that coordinate) can be
+accommodated by specifying one-dimensional arrays containing the
+grid-point locations along the stretched coordinate as part of the
+IVE input data. Staggered meshes can also be accommodated by
+setting "attributes" in the input data. The structure of more
+complicated curvilinear grids must be communicated to IVE via user
+supplied "transforms," which define the mapping between physical
+space and the array indices.</p>
+
+<p>Since four-dimensional data cannot be directly displayed on a
+flat computer screen, it is necessary to reduced the dimensionality
+of the data before it is displayed. One of IVE's primary
+capabilities involves dimension reduction or "data slicing." IVE
+allows the user to display lower-dimensional subsets of the data by
+fixing a coordinate or by averaging over the coordinate.</p>
+
+<p>IVE currently has the capability to display</p>
+
+<ul>
+<li>scalar fields as 
+
+<ul>
+<li><a href="2d_plots.html">2D scalar plots</a></li>
+
+<li><a href="1d_plots.html">1D scalar plots</a></li>
+
+<li><a href="skewt.html">vertical soundings</a></li>
+
+<li>a single point value</li>
+</ul>
+</li>
+
+<li>vector fields as <a href="vector_plots.html">2D vector
+plots</a></li>
+</ul>
+
+<p>IVE lets you overlay plots, loop plots, and control a wide
+variety of display parameters.</p>
+
+<p>IVE also can perform algebraic computations on the gridded data
+and can calculate derivatives. More complicated computations can be
+performed in user supplied subroutines.</p>
+
+<address><a href="index.html">back to index</a></address>
+
+<br>
+<br>
+</body>
+</html>
+

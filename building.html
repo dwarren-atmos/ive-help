@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 3.2//en">
+<html>
+<!--$Id: building.html,v 1.7 2001-02-27 20:26:45 warren Exp $-->
+<!--$Log:
+building.html,v $--><!--Revision 1.3  1997/07/31 19:49:34  harry-->
+<!--Fix id
+and log.--><!---->
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>Building IVE from Source</title>
+</head>
+<body>
+<p align="CENTER"><img src="images/line.gif" width="90%"></p>
+
+<p>To build IVE from source, you need to have a version of
+<b>make</b> compatible with <a href=
+"ftp://prep.ai.mit.edu/pub/gnu/make-3.75.tar.gz">GNU Make</a>. You
+also need version 3.2.1 or greater of <a href=
+"http://ngwww.ucar.edu/">NCAR Graphics library</a> (note: NCAR
+graphics is NOT public domain - you must purchase a license),
+version 1.2.x of <a href=
+"http://www.opengroup.org/tech/desktop/motif/">Motif library</a>
+(which is included with most Unix OS), and the following public
+domain libraries:</p>
+
+<ul>
+<li><a href=
+"http://www.unidata.ucar.edu/packages/netcdf/">NetCDF</a> - version
+3.3 or greater</li>
+
+<li><a href=
+"http://www.unidata.ucar.edu/packages/udunits/">udunits</a> -
+version 1.10.8 or greater</li>
+
+<li><a href=
+"ftp://ftp.atmos.washington.edu/ive/xgks-2.5.5.tar.Z">xgks</a> -
+version 2.5.5 with UW modifcations</li>
+</ul>
+
+<p>The makefile assumes that the libraries have been installed in
+/usr/local/lib, and that the include files are in
+/usr/local/include. If they are in other locations you will have to
+edit the Makefile accordingly.</p>
+
+<p>IVE has been successfully compiled from source for the following
+systems:</p>
+
+<ul>
+<li>Sun 4 - SunOS 4.1.3</li>
+
+<li>Sun - Solaris 2.5 and later with Sun unbundled compilers</li>
+
+<li>DEC Alpha - Digital Unix 3.2C and later with DEC compilers</li>
+
+<li>DEC MIPS RISC - Ultrix 4.3 with DEC compilers</li>
+
+<li>SGI - IRIX 5.3 with SGI compilers</li>
+</ul>
+
+<p>If you have a bug, or you wish to contribute other platforms to
+the IVE distribution, please send mail to <a href=
+"mailto:ive-bugs@atmos.washington.edu">ive-bugs@atmos.washington.edu</a>.</p>
+</body>
+</html>
+

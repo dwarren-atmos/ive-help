@@ -1,0 +1,245 @@
+/* The W3C Core Styles Copyright (c) 1998 W3C (MIT, INRIA, Keio), All Rights
+Reserved. W3C liability, trademark, document use and software licensing rules
+apply. See http://www.w3.org/Consortium/Legal/ipr-notice.html
+
+This stylesheet has been served in a form to avoid known bugs in your user
+agent's CSS implementation. Copying and serving this stylesheet to other
+agents may lead to unexpected results. Please refer to its address rather than
+copy it. */
+/* The above statement is from the original Style Sheet */
+
+       /* begin body type */   /* 1 - humanist sans a */
+
+BODY    {       
+        font-size:      .9em;
+        font-weight:    normal;
+        word-spacing:   normal;
+        letter-spacing: normal;
+        text-transform: none;
+        font-family:    Arial, Helvetica, sans-serif;
+        font-size-adjust:       .48;
+	margin-left:    2%;
+	margin-right:   2%;
+	background:	#ffffff;
+	color: #2e965d;
+	}
+
+P, CAPTION, BLOCKQUOTE, UL, OL, DL, DD, LI, DIR, MENU, HR    {       
+        /* inherit from body */ 
+	color:  #2e965d ;
+
+      }       
+
+OL LI   {       
+        list-style-type:        decimal;
+	color: #2e965d;
+        }       
+
+OL OL LI        {       
+        list-style-type:        lower-alpha;
+ 	color: #2e965d;
+       }       
+
+OL OL OL LI     {       
+        list-style-type:        lower-roman;
+ 	color: #2e965d; 
+       }       
+
+TABLE, TBODY, TR, TD    {       
+        font-size:      .9em;
+        word-spacing:   normal;
+        letter-spacing: normal;
+        text-transform: none;
+        font-family:   Arial, Helvetica, sans-serif;
+        font-size-adjust:       .58;
+	color: #2e965d; 
+       }       
+
+        /* end body type */     
+
+
+
+        /* begin header type */ /* 4 - modern sans a */
+                
+H1      {       
+        font-family:   Arial, Helvetica, sans-serif;
+        font-size-adjust:       .48;
+        font-size:      2em;
+        font-weight:    700;
+        font-style:     normal;
+        text-decoration:        none;
+        word-spacing:   normal;
+        letter-spacing: normal;
+        text-transform: none;
+	color:		#2e965d;
+        }       
+                
+H2      {       
+        font-family:   Arial, Helvetica, sans-serif;
+        font-size-adjust:       .48;
+        font-size:      1.75em;
+        font-weight:    500;
+        font-style:     normal;
+        text-decoration:        none;
+        word-spacing:   normal;
+        letter-spacing: normal;
+        text-transform: none;
+	color: #2e965d;
+        }       
+                
+H3      {       
+        font-family:   Arial, Helvetica, sans-serif;
+        font-size-adjust:       .48;
+        font-size:      1.58em;
+        font-weight:    500;
+        font-style:     normal;
+        text-decoration:        none;
+        word-spacing:   normal;
+        letter-spacing: normal;
+        text-transform: none;
+	color: #2e965d;
+        }       
+H4      {       
+        font-family:   Arial, Helvetica, sans-serif;
+        font-size-adjust:       .48;
+        font-size:      1.33em;
+        font-weight:    500;
+        font-style:     oblique;
+        text-decoration:        none;
+        word-spacing:   normal;
+        letter-spacing: normal;
+        text-transform: none;
+ 	color: #2e965d;
+       }       
+                
+H5, DT  {       
+        font-family:   Arial, Helvetica, sans-serif;
+        font-size-adjust:       .48;
+        font-size:      1.17em;
+        font-weight:    500;
+        font-style:     normal;
+        text-decoration:        none;
+        word-spacing:   normal;
+        letter-spacing: normal;
+        text-transform: none;
+	color: #2e965d;
+        }       
+                
+H6      {       
+        font-family:   Arial, Helvetica, sans-serif;
+        font-size-adjust:       .48;
+        font-size:      1em;
+        font-weight:    500;
+        font-style:     normal;
+        text-decoration:        none;
+        word-spacing:   normal;
+        letter-spacing: normal;
+        text-transform: none;
+ 	color: #2e965d;
+       }       
+                
+TFOOT, THEAD    {       
+        font-size:      .9em;
+        word-spacing:   normal;
+        letter-spacing: normal;
+        text-transform: none;
+        font-family:   Arial, Helvetica, sans-serif;
+        font-size-adjust:       .48;
+	color: #2e965d;
+	}
+
+                
+TH      {       
+        vertical-align: baseline;
+        font-size:      .9em;
+        font-weight:    bold;
+        word-spacing:   normal;
+        letter-spacing: normal;
+        text-transform: none;
+        font-family:   Arial, Helvetica, sans-serif;
+        font-size-adjust:       .48;
+	color: #2e965d;
+        }       
+                
+        /* end header type */   
+
+        /* begin affordances */ /* 4 - trop a */
+
+
+
+EM      {       
+        font-style:     italic;
+        font-weight:    bold;
+	color: #2e965d;
+        }       
+                
+STRONG  {       
+        font-weight:    bold;
+        font-style:     normal;
+ 	color: #2e965d;
+         }       
+                
+EM STRONG, STRONG EM    {       
+        font-family:   Arial, Helvetica, sans-serif;
+        font-size-adjust:       .48;
+        font-size:      1.58em;
+        font-weight:    500;
+        text-transform: uppercase;
+        font-style:     normal;
+        font-weight:    bolder;
+        color:  #2e965d;
+        }       
+
+I      {       
+        font-style:     italic;
+        font-weight:    bold;
+ 	color: #2e965d;
+        }       
+                
+B       {       
+        font-weight:    bold;
+        font-style:     normal;
+ 	color: #2e965d;
+        }       
+                
+I B, B I    {       
+        font-family:   Arial, Helvetica, sans-serif;
+        font-size:      1.58em;
+        font-weight:    500;
+        font-style:     normal;
+        font-weight:    bolder;
+        color:  #2e965d;
+        }       
+
+                
+
+A:link  {       
+        text-decoration:        none;
+        font-weight:    bold;
+        color:  #099;
+        }       
+                
+A:visited       {       
+        text-decoration:        none;
+        font-weight:    bold;
+        color:  #3ebc77;
+        }       
+                
+A:active        {       
+        text-decoration:        none;
+        font-weight:    bold;
+        color:  #F00;
+        }       
+                
+A:hover {       
+        text-decoration:        none;
+        color:  #F00;
+        background:     #F00;
+        }       
+                
+A:offsite       {       
+        text-decoration:        none;
+        font-weight:    normal;
+        color:  #C00;
+        background:     #FFC;
+        }       

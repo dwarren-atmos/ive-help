@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>Plotting a Temperature Profile on a Skew T, Log P
+Diagram</title>
+</head>
+<body>
+<center>
+
+	<em>This file describes the procedures for creating a Skew T,
+Log P profile of a temperature field.</em></h1>
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<h3>Procedures:</h3>
+
+<ul>
+<li>It is first necessary to input a data <a href=
+"file.html">FILE</a>. This activates the Window/Slicer Widget
+(depicted below).</li>
+
+<li>At the Window/Slicer Widget, "fix" or "average" all coordinates
+<em>except the vertical coordinate</em> Adjust the fixed coordate
+values using the slicer bars until the appropriate horizontal
+location and time values for the vertical profile are displayed (as
+shown below).</li>
+</ul>
+
+<p><a href="images/window_slicer1.gif"></a></p>
+
+<center><img src="images/window_slicer1.gif" alt=
+"Window/Slicer Widget" border="0"></center>
+
+<center><i>Window/Slicer Widget</i></center>
+
+<br>
+<br>
+ 
+
+<div style="margin-left: 2em"><em>NOTE: The number of variables
+that you allow to vary determines the number of dimensions
+contained in the plot. For example, if two coordinates are "free",
+then IVE will create a <a href="2d_plots.html">two-dimensional
+plot</a>. If you "fix" or "average" all coordinates, then a Value
+Info Window is activated, displaying the value of the field at the
+fixed point you have specified.</em></div>
+
+<ul>
+<li>Once you have fixed all coordinates except the vertical
+coordinate, the IVE Main Window is automatically changed to a
+one-dimensional mode. Make sure that "Skew T Plot" is displayed,
+unless you wish to produce a 1D plot on a linear or logarithmic
+scale (see <a href="1d_plots.html">Producing a 1D Scalar
+Plot</a>).</li>
+</ul>
+
+<center><a href="images/skewt_main_window.gif" border="0"><img src=
+"images/skewt_main_window.gif" alt="IVE Main Window in 1D Mode"
+border="0"></a></center>
+
+<center><i>IVE Main Window in 1D Mode</i></center>
+
+<ul>
+<li>When Skew T Plot is selected, the Skew T Properties Window
+appears automatically (pictured below). The Skew T properties
+window allows you to specify the pressure component, temperature
+component, and dew point component (optional). Any diagnostic
+variable or simple mathematical computation using diagnostic
+variables may be entered in each box. Note that IVE assumes that
+the pressure component is in Pascals (N/m^2) and that temperature
+and dew point components are in Kelvins (see also <a href=
+"skewt_components.html">SKEWT_COMPONENTS</a>).</li>
+</ul>
+
+<p><a href="images/skewt_properties.gif" border="0"></a></p>
+
+<center><img src="images/skewt_properties.gif" alt=
+"Skew T Properties Window" border="0"></center>
+
+<center><i>Skew T Properties Window</i></center>
+
+<br>
+<br>
+ 
+
+<ul>
+<li>Finally, when all parameters have been set, click on "New Plot"
+in the IVE Main Window to display the plot, or "Overlay Plot" to
+overlay an existing plot (see <a href="plot.html">PLOT</a> and <a
+href="overlay_plot.html">OVERLAY PLOT</a>).</li>
+</ul>
+
+<h3>Example:</h3>
+
+<ul>
+<li>Pictured below is a sample Skew T, Log P diagram produced by
+IVE:</li>
+</ul>
+
+<center><img src="images/skewt.gif" border="1" width=
+"95%"></center>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

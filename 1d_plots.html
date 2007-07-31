@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>Producing a 1D Scalar Plot</title>
+</head>
+<body>
+<center>
+
+	<em>This file discusses the procedures for creating scalar
+plots in one dimension.</em></h1>
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<h3>Procedures:</h3>
+
+<ul>
+<li>It is first necessary to input a data <a href=
+"file.html">FILE</a>. This activates the Window/Slicer Widget
+(depicted below).</li>
+
+<li>Then, select a <a href="field.html">FIELD</a>.</li>
+
+<li>At the Window/Slicer Widget, "fix" or "average" all coordinates
+<em>except one</em>. If this variable is a vertical coordinate such
+as height, it will become the ordinate in your 1D plot. If the
+variable is a horizontal coordinate such as X or Y, it will become
+the abscissa in your 1D plot. Adjust the range of the free variable
+using the appropriate slider bar (see also <a href=
+"window.html">WINDOW</a>).</li>
+</ul>
+
+<p><a href="images/window_slicer1.gif"></a></p>
+
+<center><img src="images/window_slicer1.gif" alt=
+"Window/Slicer Widget" border="0"></center>
+
+<center><i>Window/Slicer Widget</i></center>
+
+<br>
+<br>
+ 
+
+<div style="margin-left: 2em"><em>NOTE: The number of variables
+that you allow to vary determines the number of dimensions
+contained in the plot. For example, if two coordinates are "free",
+then IVE will create a <a href="2d_plots.html">two-dimensional
+plot</a>. If you "fix" or "average" all coordinates, then a Value
+Info Window is activated, displaying the value of the field at the
+fixed point you have specified.</em></div>
+
+<ul>
+<li>Once you have selected the coordinate for the 1D plot, the IVE
+Main Window is automatically changed to a one-dimensional mode.
+Make sure that "Line Plot" is displayed, unless you wish to plot a
+Skew T, Log P diagram of a temperature profile (see <a href=
+"skewt.html">Plotting a Temperature Profile on a Skew T, Log P
+Diagram</a>).</li>
+</ul>
+
+<center><a href="images/line_main_window.gif" border="0"><img src=
+"images/line_main_window.gif" alt="IVE Main Window in 1D Mode"
+border="0"></a></center>
+
+<center><i>IVE Main Window in 1D Mode</i></center>
+
+<ul>
+<li>An 1D Properties Window (pictured below) will also appear
+automatically when you select the coordinate for the 1D plot. The
+properties window allows you to specify axis ranges, scales, and
+tic intervals. Both linear and logarithmic axis scales are
+available in IVE and can be selected by clicking on the appropriate
+diamond-shaped button. The range and domain as well as Major and
+minor axis tic intervals can be specified by clicking on the
+apropriate boxes and inputting the desired values. If "d" or
+"default" is entered in any box, IVE automatically determines a
+value for your plot.</li>
+</ul>
+
+<p><a href="images/line_properties.gif" border="0"></a></p>
+
+<center><img src="images/line_properties.gif" alt=
+"1D Properties Window" border="0"></center>
+
+<center><i>1D Properties Window</i></center>
+
+<br>
+<br>
+ 
+
+<ul>
+<li>Finally, when all parameters have been set, click on "New Plot"
+in the IVE Main Window to display the plot, or "Overlay Plot" to
+overlay an existing plot (see <a href="plot.html">PLOT</a> and <a
+href="overlay_plot.html">OVERLAY PLOT</a>).</li>
+</ul>
+
+<h3>Example:</h3>
+
+<ul>
+<li>Pictured below is a sample 1D scalar plot produced by IVE:</li>
+</ul>
+
+<center><img src="images/line_plot.gif" border="1" width=
+"95%"></center>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

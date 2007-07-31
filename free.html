@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 3.2//en">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<meta http-equiv="Content-Type" content=
+"text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content=
+"Mozilla/4.05 [en] (X11; I; SunOS 5.6 sun4m) [Netscape]">
+<title>FREE</title>
+</head>
+<body>
+<center>
+<center>
+
+	s<i>This command is used to free the memory held by a field that
+has been read from a data file.</i></h1>
+
+<center>
+
+	s<img src="images/line.gif"></h1>
+</center>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>There is no widget for this command.</li>
+</ul>
+
+<p>Command:</p>
+
+<ul>
+<li>FREE = field</li>
+</ul>
+
+<p>Arguments :</p>
+
+<ul>
+<li>field: the field name which will be deleted from memory.</li>
+</ul>
+
+<p>Examples :</p>
+
+<ul>
+<li>FREE = UWIND</li>
+</ul>
+
+<p>Notes :</p>
+
+<ul>
+<li>This command is most useful when machine memory limits are
+reached, and no more fields may be read in. If a data file, which
+has been previously read containts 4 fields (variables), i.e. A, B,
+C and D, each one of these variables has assigned location in the
+memory. Let's suppose we can picture their sequence in the memory
+as ...A...B...C...D.... (There may be a gap between variables since
+IVE allocates additional memory for its own use from time to time).
+If for example user types in command 'FREE = B', then space used by
+B is freed up, thus: ...A...free...C...D.... The total allocated
+memory is however still the same (from A to D). This is also true
+even if the last field was freed up (i.e. 'FREE = D' which results
+in ...A...B...C...) and there apparently is more memory available.
+Freeing of memory doesn't show up as long as IVE is running. If a
+new field is being invoked, or a new file is being read in, then
+the freed space can be used if the new variable uses equal or
+lesser amount of memory. In our case, we were left with
+...A...free...C...D.... The new file contains variable X. If X
+takes less memory than B, then it will fit into the vacant slot
+...A...X...C...D... and the total allocated memory remains the
+same. If X takes more memory than B, it will be positioned at the
+end, ...A...free...C...D...X.... If the goal of freeing the space
+was to avoid exceeding a memory size limit, then in the latter
+example X can not be read in - a larger block of continuous memory
+has to be freed.</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</center>
+</body>
+</html>
+

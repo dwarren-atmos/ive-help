@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>LINEPATTERN</title>
+</head>
+<body>
+<center><em>This command allows you to choose line patterns.</em> 
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>From the "Custom Lines" menu select the "Pattern" submenu. Then
+select one of: "Both", "Pos", "Neg" or "Default". If you did not
+select Default you continue on and select a pattern (see <a href=
+"custom_lines.html">Custom Lines</a>).</li>
+</ul>
+
+Command:
+
+<ul>
+<li>LINEPATTERN = type,type</li>
+</ul>
+
+Arguments : 
+
+<ul>
+<li>type: at least one type, and possibly two, may be entered. The
+first type specifies the line pattern used for contour lines whose
+value &gt; 0, and the second type specifies the line pattern used
+for contour lines whose value &lt; 0. If only one type is
+specified, that pattern is used for all contour lines. valid
+choices for type are : 
+
+<ul>
+<li>SOLID - a solid line pattern will be used.</li>
+
+<li>DASH - a dashed line pattern will be used.</li>
+
+<li>DOT - a dotted line pattern will be used.</li>
+
+<li>DASHDOT - a dash-dot line pattern will be used.</li>
+
+<li>DASHDOTDOT - a dash-dot-dot line pattern will be used.</li>
+
+<li>LONGDASHSHORT - a long-short dash line pattern will be
+used.</li>
+
+<li>LONGDASH - a long dashed line pattern will be used.</li>
+</ul>
+</li>
+</ul>
+
+Examples : 
+
+<ul>
+<li>LINEPATTERN = DOT,DASHDOT<br>
+ produces a plot where the contour lines &lt;= 0 are dotted and the
+contour lines &gt; 0 are dash-dotted.</li>
+</ul>
+
+Notes : 
+
+<ul>
+<li>The default is LINEPATTERN = DOT;SOLID (contour lines whose
+value &lt;= 0 are drawn with dotted lines, and contour lines whose
+value &gt; 0 are drawn with solid lines.</li>
+
+<li>This option remains in effect until changed.</li>
+
+<li>Solid lines are drawn fastest.</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

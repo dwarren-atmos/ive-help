@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>Environment Variables</title>
+</head>
+<body>
+<center>
+
+	<em>This document contains intructions for customizing and
+streamlining your IVE session by setting UNIX environment
+variables.</em></h1>
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>A number of IVE environment variables are available for
+customizing your IVE sessions. The syntax you use to set the
+environment variables depends on your UNIX shell. There are two
+ways to set your environment variables:</p>
+
+<ol>
+<li>One method is to interactively type the appropriate syntax at
+the shell prompt. However, the environment you set only applies
+until you log off the system or assign different values to the
+environment variables.</li>
+
+<li>Another method is to update your shell resource file so that
+the environment variable is automatically set each time you log on
+the system.</li>
+</ol>
+
+<h4>Environment Variables Description:</h4>
+
+The following environment variables set IVE defaults that can
+reduce the user inputs required during your IVE session: 
+
+<div style="margin-left: 2em">
+<dl>
+<dt>IVECTB</dt>
+
+<dd>Specifies the directory location of your personal color table
+directory (default is /usr/local/lib/ive)</dd>
+
+<dt>IVECTBFILE</dt>
+
+<dd>Indicates which color table is to become the default color
+table in your next IVE session; the color table you select may be a
+built-in color table from the /usr/local/lib/ive directory or your
+own creation (if this variable is not set, IVE automatically loads
+default.ctb)</dd>
+
+<dt>IVEDAT</dt>
+
+<dd>Specifies the directory location of your data files (default is
+the current directory where the ive session is executed)</dd>
+
+<dt>IVEHELPBROWSER</dt>
+
+<dd>Specifies which WWW browser will be used when viewing IVE Help
+(default is Mosaic under Ultrix, Netscape otherwise)</dd>
+
+<dt>IVEMASK</dt>
+
+<dd>Selects the mask for listing data files (default is *)</dd>
+
+<dt>IVETRANS</dt>
+
+<dd>Specifies the directory location of your transform files
+(default is /usr/local/lib/ive/help)</dd>
+
+<dt>IVETRANSFILE</dt>
+
+<dd>Indicates which transform file to load at the beginning of each
+ive session (default is none)</dd>
+
+<dt>IVETRANSFILE_BETA</dt>
+
+<dd>Indicates which transform file to load at the beginning of each
+ive_beta session (default is none)</dd>
+</dl>
+</div>
+
+<br>
+ The following environment variables specify the location of
+directories automatically accessed by IVE, and are used primarily
+when installing IVE on your system: 
+
+<div style="margin-left: 2em">
+<dl>
+<dt>IVECTBLIB</dt>
+
+<dd>Specifies the directory location of IVE's built-in color tables
+(default is /usr/local/lib/ive). The names of the seven built-in
+color tables are listed below: 
+
+<ul>
+<li>blue_red.ctb<br>
+</li>
+
+<li>dark_light.ctb<br>
+</li>
+
+<li>default.ctb<br>
+</li>
+
+<li>green_blue_red.ctb<br>
+</li>
+
+<li>light_dark.ctb<br>
+</li>
+
+<li>movie_blue_red.ctb<br>
+</li>
+
+<li>rainbow.ctb<br>
+</li>
+</ul>
+
+Diagrams of IVE's built-in color tables are available in the
+document entitled <a href="color_fill.html">Color Fill</a>.</dd>
+
+<dt>IVEHELPDIR</dt>
+
+<dd>Specifies the directory location where the IVE help files are
+to be located (default is /usr/local/lib/ive/help).</dd>
+</dl>
+</div>
+
+<br>
+ 
+
+<h4>Examples:</h4>
+
+If you are using the C shell, and you wish to load a personalized
+transform file each time you begin IVE: 
+
+<ul>
+<li>Add "setenv IVETRANSFILE ~/ive/transforms/my_transform.o" to
+your .cshrc file. This tells IVE to load the file
+<i>my_transform.o</i> from the <i>~/ive/transforms</i> directory
+each time IVE is initialized.</li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul>
+<li>A more detailed description of IVE transforms is available in
+<a href="transform_writing.html">Writing Transforms for
+IVE</a>.</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

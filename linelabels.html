@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>LINELABELS and NULBLL</title>
+</head>
+<body>
+<center><em>These options allow you to turn off the contour line
+labels or vary the number of unlabelled contour lines falling
+between labelled contour lines.</em> 
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>Using the scale widget in the Properties window select the
+frequency of labled lines. Selecting 0 will turn line labels
+off.</li>
+</ul>
+
+Command:
+
+<ul>
+<li>LINELABELS = choice</li>
+
+<li>NULBLL = number_of_lines</li>
+</ul>
+
+Arguments : 
+
+<ul>
+<li>choice: choice may be either ON or OFF</li>
+
+<li>number_of_lines: specifies the number of unlabeled lines that
+lie between labeled lines on contour plots.</li>
+</ul>
+
+Examples : 
+
+<ul>
+<li>LINELABELS = OFF</li>
+
+<li>NULBLL = 3<br>
+ This leaves 3 blank lines between labels (same as label every 4
+lines)</li>
+</ul>
+
+Notes : 
+
+<ul>
+<li>The default is labels every 4 lines.</li>
+
+<li>These options remains in effect until changed.</li>
+
+<li>If the contouring routines judge that a contour line is too
+short for a label, no label will be drawn, regardless of the value
+of NULBLL.</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

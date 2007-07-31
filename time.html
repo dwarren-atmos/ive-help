@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>TIME</title>
+</head>
+<body>
+<center>
+
+	<em>This command "fixes" the T coordinate at a specified
+value.</em></h1>
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>From the Window/Slicer Widget, click on the box next to the T
+coordinate until it displays the word "Fixed". Then, using the
+slider bar provided, select the T location you desire. Or click
+until the word "Average" and set the range of the average. Or click
+until the word "Free". (For a diagram of the Window/Slicer Widget,
+see <a href="2d_plots.html">Producing a 2D Scalar Plot</a>, <a
+href="1d_plots.html">Producing a 1D Scalar Plot</a>, or <a href=
+"vector_plots.html">Producing a Vector Plot</a>).</li>
+</ul>
+
+Command:
+
+<ul>
+<li>TIME=value</li>
+</ul>
+
+Arguments:
+
+<ul>
+<li>value: one of the following: 
+
+<ul>
+<li>a number: this fixes the T coordinate to that value and reduces
+the number of coordinates that will be allowed to vary in your
+plot.</li>
+
+<li>"average": an average in T will be plotted. The range of the
+average is the window value in T (see <a href=
+"window.html">WINDOW</a>).</li>
+
+<li>"free" the T coordinate is no longer locked to one value or an
+average, increasing the number of coordinates that will be allowed
+to vary in your plot.</li>
+</ul>
+</li>
+</ul>
+
+Examples:
+
+<ul>
+<li>TIME=300</li>
+
+<li>TIME=average</li>
+
+<li>TIME=free</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

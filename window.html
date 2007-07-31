@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>WINDOW</title>
+</head>
+<body>
+<center>
+
+	<em>This command sets the window of data that is displayed in
+the Graphics Display Window.</em></h1>
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>From the Window/Slicer Widget, vary the slider bars until the
+desired maximum and minimum values are displayed for each
+coordinate.</li>
+</ul>
+
+Command: 
+
+<ul>
+<li>WINDOW= XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, TMIN, TMAX</li>
+</ul>
+
+Arguments: 
+
+<ul>
+<li>Input the minimum and maximum value of each coordinate to
+appear in the graphics display window. If the coordinate does not
+exist in your data file or is held "fixed" in the plot, leave a
+space in the argument line for both the min and max value.</li>
+</ul>
+
+Examples: 
+
+<ul>
+<li>WINDOW=0,200,,,0,10,,<br>
+Specifies a horizontal domain of X values from 0 to 200 and a
+vertical range of Z values from 0 to 10. Y and T are fixed, or do
+not exist in the data file.</li>
+</ul>
+
+Notes: 
+
+<ul>
+<li>Once the "window" has been specified, executing the <a href=
+"new_plot.html">NEW_PLOT</a> command updates the graphics
+display.</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>DATA_UNITS</title>
+</head>
+<body>
+<center>
+
+	<em>This command lets you change the units that data will be
+displayed in.</em></h1>
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>Select a field to be plotted (see help on FIELD). Using the
+right mouse button, click on the field button in the main widget. A
+pop-up widget will appear that displays the current variable units.
+To change the units, move to the Display Units type-in box and
+enter the desired units. Use the left mouse button to click on the
+OK button to make the new units current, or click on CANCEL to
+revert to the original units.</li>
+</ul>
+
+Command:
+
+<ul>
+<li>DATA_UNITS = units</li>
+</ul>
+
+Arguments : 
+
+<ul>
+<li>units: the desired data display units</li>
+</ul>
+
+Examples : 
+
+<ul>
+<li>DATA_UNITS=ft/s<br>
+ This changes the data display units to feet/seconds</li>
+
+<li>suppose that a variable UWIND has current display units of
+"m/s", but you want UWIND displayed in feet/second. Type "ft/s" in
+the Display Units type-in box, then click on OK. The variable UWIND
+will subsequently be displayed in the units ft/s.</li>
+</ul>
+
+Notes : 
+
+<ul>
+<li>This option remains in effect until changed.</li>
+
+<li>To use this feature, the variable whose units will be changed
+must already have units assigned to it via an attribute entitled
+"display_units".</li>
+
+<li>Old units must be convertible into new units, or an error will
+result.</li>
+
+<li>This feature utilizes the Unidata units utility UDUNITS, which
+must be available on the system. For help on this utility, see the
+man page or the system administrator.</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

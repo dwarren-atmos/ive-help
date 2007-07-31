@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>LOOP</title>
+</head>
+<body>
+<center>
+
+	<em>This command generates a frame progression along any fixed
+coordinate.</em></h1>
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>(see <a href="looping.html">Looping</a>)</li>
+</ul>
+
+Command:
+
+<ul>
+<li>LOOP=coordinate, start value, increment, end value, batch</li>
+</ul>
+
+Arguments:
+
+<ul>
+<li>coordinate: the name of the coordinate that will be varied in
+the loop</li>
+
+<li>start value: the beginning value of the loop coordinate</li>
+
+<li>increment: the value added to the loop coordinate between
+frames</li>
+
+<li>end value: the final value of the loop coordinate</li>
+
+<li>batch: if present, a loop window is not created, but the pixmaps for
+the loop images are created.  Usually used with virtual frame buffer
+server (Xvfb) when creating loops of GIF images in batch mode.
+This parameter cannot be set from the widget.</li> 
+</ul>
+
+Examples:
+
+<ul>
+<li>LOOP=TIME, 1000.00, 500.00, 5000.00<br>
+ This creates a time loop consisting of nine frames beginning at
+TIME=1000.0 and ending at TIME=5000.00.</li>
+
+<li>LOOP=Z, 1, 1, 10<br>
+ In this example, a loop along the Z axis is generated. It consists
+of 10 frames, beginning at Z=1 and ending at Z=10.</li>
+</ul>
+
+Notes: 
+
+<ul>
+<li>Prior to building a loop, a file (<a href="file.html">FILE</a>
+command) and a field (<a href="field.html">FIELD</a> command) must
+be specified. It is also necessary to produce a sample plot (<a
+href="plot.html">PLOT</a> command) of one of the frames before
+generating a loop.</li>
+
+<li>Loops can only be created along coordinate axes that you have
+fixed.</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

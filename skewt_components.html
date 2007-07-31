@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>SKEWT_COMPONENTS</title>
+</head>
+<body>
+<center>
+
+	<em>This command allows you to specify the pressure,
+temperature, and dew point components of a Skew T plot.</em></h1>
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>(see <a href="skewt.html">Plotting a Temperature Profile on a
+Skew T, Log P Diagram</a></li>
+</ul>
+
+Command:
+
+<ul>
+<li>SKEWT_COMPONENTS= pressure, temperature, dew_point</li>
+</ul>
+
+Arguments : 
+
+<ul>
+<li>pressure: the pressure component</li>
+
+<li>temperature: the temperature component</li>
+
+<li>dew_point: the dew point component (optional)</li>
+</ul>
+
+Examples : 
+
+<ul>
+<li>SKEWT_COMPONENTS=PM, TC+273.16, TD+273.16</li>
+</ul>
+
+Notes : 
+
+<ul>
+<li>The Skew T components may be expressed in tems of field
+variables, functions of field variables, or diagnostic variables
+(see also <a href="field.html">FIELD</a>).</li>
+
+<li>The dew point component is optional.</li>
+
+<li>The pressure component must be in Pascal units (N/m^2) and the
+temperature and dew point components must be in Kelvins.</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+

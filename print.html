@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<title>PRINT</title>
+</head>
+<body>
+<center><em>This command may be used to send a page of 1 to 6 plots
+to a printer.</em> 
+
+<p><img src="images/line.gif" width="90%"></p>
+</center>
+
+<p>Widget:</p>
+
+<ul>
+<li>Current plot - Select "Print Current" from the "Print" submenu
+of the "Output" menu.</li>
+
+<li>2, 4, or 6 up - Select the appropriate "page picture" from the
+"Print" submenu of the "Output" menu. A window will appear with
+type in boxes for plot numbers. Enter the plot numbers in the
+location you would like them to print, then press the "Print"
+button at the buttom of the window. (c[urrent] will enter the
+number of the current plot, negative numbers are assumed to go
+backwards from the current and positive numbers are assumed to be
+absolute plot numbers.</li>
+</ul>
+
+Command:
+
+<ul>
+<li>PRINT</li>
+
+<li>PRINT = PLOT1,PLOT2...,PLOT6</li>
+</ul>
+
+Arguments : 
+
+<ul>
+<li>No argument: print the current plot</li>
+
+<li>PLOT1,PLOT2...,PLOT6 - if up to six arguments are specified,
+then the plots identified by the arguments are printed.</li>
+</ul>
+
+Examples : 
+
+<ul>
+<li>PRINT</li>
+
+<li>PRINT = 2,4<br>
+ plots 2 and 4 are both printed on the same page.</li>
+</ul>
+
+Notes : 
+
+<ul>
+<li>Use the <a href="listsegments.html">LISTSEGMENTS</a> command to
+get a listing of all plot numbers.</li>
+
+<li>The aspect ratio of the printed plots can be adjusted by using
+the <a href="aspect_ratio.html">ASPECT_RATIO</a> command.</li>
+
+<li>See <a href="write_frame.html">WRITE_FRAME</a> for information
+on outputting to a PostScript file.</li>
+</ul>
+
+<address><a href="index.html">back to index</a></address>
+</body>
+</html>
+
