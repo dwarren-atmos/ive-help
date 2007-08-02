@@ -1,12 +1,12 @@
 <!DOCTYPE html PUBLIC "-//w3c//dtd html 3.2//en">
 <html>
-<!--$Id: building.html,v 1.7 2001-02-27 20:26:45 warren Exp $-->
+<!--$Id: building.html,v 1.7 2001/02/27 20:26:45 warren Exp $-->
 <!--$Log:
 building.html,v $--><!--Revision 1.3  1997/07/31 19:49:34  harry-->
 <!--Fix id
 and log.--><!---->
 <head>
-<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name="generator" content="Bluefish 1.0.7">
 <link type="text/css" rel="stylesheet" href="/styles/IVE">
 <title>Building IVE from Source</title>
 </head>
@@ -15,11 +15,10 @@ and log.--><!---->
 
 <p>To build IVE from source, you need to have a version of
 <b>make</b> compatible with <a href=
-"ftp://prep.ai.mit.edu/pub/gnu/make-3.75.tar.gz">GNU Make</a>. You
+"http://www.gnu.org/software/make/">GNU Make</a>. You
 also need version 3.2.1 or greater of <a href=
-"http://ngwww.ucar.edu/">NCAR Graphics library</a> (note: NCAR
-graphics is NOT public domain - you must purchase a license),
-version 1.2.x of <a href=
+"http://ngwww.ucar.edu/">NCAR Graphics library</a>,
+a <a href=
 "http://www.opengroup.org/tech/desktop/motif/">Motif library</a>
 (which is included with most Unix OS), and the following public
 domain libraries:</p>
@@ -33,17 +32,18 @@ domain libraries:</p>
 "http://www.unidata.ucar.edu/packages/udunits/">udunits</a> -
 version 1.10.8 or greater</li>
 
-<li><a href=
-"ftp://ftp.atmos.washington.edu/ive/xgks-2.5.5.tar.Z">xgks</a> -
-version 2.5.5 with UW modifcations</li>
+<li>xgks - version 2.5.5 with UW modifcations<br>
+(svn co https://www.atmos.washington.edu/svn/xgks-uw)</li>
 </ul>
 
-<p>The makefile assumes that the libraries have been installed in
+<p>The makefile assumes that the environment variable NCARG_ROOT has been set, 
+the libraries have been installed in
 /usr/local/lib, and that the include files are in
 /usr/local/include. If they are in other locations you will have to
-edit the Makefile accordingly.</p>
+edit the config file accordingly. Architecture dependant config files are in the config directory.
+You should examine the proper config file for your architechture prior to compiling.</p>
 
-<p>IVE has been successfully compiled from source for the following
+<p>IVE has at various times been successfully compiled from source for the following
 systems:</p>
 
 <ul>
@@ -56,7 +56,10 @@ systems:</p>
 <li>DEC MIPS RISC - Ultrix 4.3 with DEC compilers</li>
 
 <li>SGI - IRIX 5.3 with SGI compilers</li>
+<li>Debian Sarge</li>
+<li>Debian Etch</li>
 </ul>
+<p>It is actively used on True64 Unix and Linux at the University of Washington.</p>
 
 <p>If you have a bug, or you wish to contribute other platforms to
 the IVE distribution, please send mail to <a href=
