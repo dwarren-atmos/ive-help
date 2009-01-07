@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="generator" content="HTML Tidy, see www.w3.org">
-<link type="text/css" rel="stylesheet" href="/styles/IVE">
+<link type="text/css" rel="stylesheet" href="styles/IVE">
 <title>Writing NetCDF Files for IVE</title>
 </head>
 <body>
@@ -12,22 +12,22 @@
 <h2>Writing Output from FORTRAN Code</h2>
 
  <p>
-All data loaded into IVE must be in <a href=""
+All data loaded into IVE must be in <a href=
 "http://www.unidata.ucar.edu/packages/netcdf/index.html">netCDF</a>
 (network Common Data Form) format. Sample netCDF files for use with
-the default IVE transforms are described on the help page <a href=""
+the default IVE transforms are described on the help page <a href=
 "data_format.html">IVE Data Format</a>. The following will describe
 two ways of generating the netCDF file described in the third
 example of "IVE Data Format." 
  </p>
 <h3>Creating Output Using CDL files and `ncgen'</h3>
  <p>
-A <a href=""
+A <a href=
 "http://www.unidata.ucar.edu/packages/netcdf/guide_4.html#SEC18">CDL</a>
 (network Common data form Description Language) file is an ASCII
 descripton of the binary data in a netCDF file that is designed to
 be easily read by humans. CDL files can be generated from netCDF
-files via the <a href=""
+files via the <a href=
 "http://www.unidata.ucar.edu/packages/netcdf/guide_12.html#SEC95">`ncdump',</a>
 command. For example, 
  </p>
@@ -93,7 +93,7 @@ dimensions:</tt>
  time = 0, 2, 4, 6, 8, 10, 12 ;</tt></div>
 </blockquote>
 
-<p>The command <a href=""
+<p>The command <a href=
 "http://www.unidata.ucar.edu/packages/netcdf/guide_12.html#SEC93">`ncgen'</a>
 is the inverse of `ncdump'; it converts an ASCII CDL file to a
 binary netCDF file. For example</p>
@@ -113,7 +113,7 @@ in a FORTRAN program. The data set created is the one associated
 with the preceding CDL file. Everything except the data for the
 variables <tt>`A'</tt> and <tt>`time'</tt> are written to the
 original CDL file. This file is then converted to a netCDF file by
-`ncgen' and opened for further data input with <a href=""
+`ncgen' and opened for further data input with <a href=
 "http://www.unidata.ucar.edu/packages/netcdf/guide_7.html#SEC42">`ncopn'</a>.
 The data for <tt>`A'</tt> and <tt>`time'</tt> are subsequently
 written directly to the open netCDF file in a manner similar to
@@ -243,12 +243,12 @@ c     -----------------------------------------------------------------
 c
 c       Open the new netcdf file 
 c
-      cdfid=<a href=""
+      cdfid=<a href=
 "http://www.unidata.ucar.edu/packages/netcdf/guide_7.html#SEC42">ncopn</a>(cdf_out, NCWRITE, ierr)
 c
 c     Get the variable ID's for A and time
 c
-      idtime=<a href=""
+      idtime=<a href=
 "http://www.unidata.ucar.edu/packages/netcdf/guide_9.html#SEC58">ncvid</a>(cdfid, 'time'  , ierr)
       idA=ncvid(cdfid, 'A'  , ierr)
 c
@@ -262,7 +262,7 @@ c
       do time_index = 1, 7
 
          actual_time = (time_index-1)*2.
-         call <a href=""
+         call <a href=
 "http://www.unidata.ucar.edu/packages/netcdf/guide_9.html#SEC60">ncvpt1</a>(cdfid, idtime, time_index, actual_time, ierr)
 c
 c       Compute the variable A
@@ -278,7 +278,7 @@ c
 c
 c          Write data tp `A'
 c
-         call <a href=""
+         call <a href=
 "http://www.unidata.ucar.edu/packages/netcdf/guide_9.html#SEC61">ncvpt</a>(cdfid, idA , start, count, A , ierr)
       enddo
 c
@@ -286,7 +286,7 @@ c     -----------------------------------------------------------------
 c       Close the netCDF file
 c     -----------------------------------------------------------------
 c
-      call <a href=""
+      call <a href=
 "http://www.unidata.ucar.edu/packages/netcdf/guide_7.html#SEC45">ncclos</a>(cdfid, ierr)
 c
       stop
